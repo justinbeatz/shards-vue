@@ -84,7 +84,7 @@
   ],
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "shards-ui": "^2.1.0",
+    "shards-ui": "^3.0.0",
     "lodash.xor": "^4.5.0",
     "nouislider": "^11.1.0",
     "popper.js": "^1.14.4",
