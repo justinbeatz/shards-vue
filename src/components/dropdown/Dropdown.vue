@@ -19,7 +19,14 @@
             :size="size"
             :id="computedSplitID"
             @click="click">
-            <slot name="button-content">{{ text }}</slot>
+            <slot name="button-content">
+                <i
+                    v-if="icon !== ''"
+                    class="material-icons">
+                    {{ icon }}
+                </i>
+                {{ text }}
+            </slot>
         </d-button>
 
         <!-- Dropdown Toggle -->
@@ -170,6 +177,13 @@ export default {
          * The button label's text.
          */
         text: {
+            type: String,
+            default: ''
+        },
+        /**
+         * Icon used in the dropdown
+         */
+        icon: {
             type: String,
             default: ''
         },
