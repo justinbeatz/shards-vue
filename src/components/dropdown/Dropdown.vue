@@ -46,7 +46,14 @@
             @click="toggle"
             @keydown="toggle">
             <span v-if="split" class="sr-only">{{ toggleText }}</span>
-            <slot v-else name="button-content">{{ text }}</slot>
+            <slot v-else name="button-content">
+                <i
+                    v-if="icon !== ''"
+                    class="material-icons">
+                    {{ icon }}
+                </i>
+                {{ text }}
+            </slot>
         </component>
 
         <!-- Dropdown Menu -->
