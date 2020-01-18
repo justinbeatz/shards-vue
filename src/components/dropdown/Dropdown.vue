@@ -460,4 +460,8 @@ export default {
 .nav-link:hover {
     cursor: pointer;
 }
+
+.material-icons {
+    color: #fff;
+}
 </style>
