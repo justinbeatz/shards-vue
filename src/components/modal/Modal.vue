@@ -65,6 +65,13 @@ export default {
         }
 
         /**
+         * Do not close modals when SWAL alert is opened over
+         */
+        if (document.querySelector('.swal2-container')) {
+            return;
+        }
+
+        /**
          * @event close
          *
          * Triggered when the modal is closed.
