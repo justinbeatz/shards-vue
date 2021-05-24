@@ -115,6 +115,8 @@ export default {
             if (this.right) {
                 return 'float-right'
             }
+
+            return '';
         }
     }
 }

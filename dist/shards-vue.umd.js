@@ -616,15 +616,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dBtnClose = normalizeComponent_1(
+      var __vue_component__ = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
         __vue_inject_styles__,
         __vue_script__,
         __vue_scope_id__,
         __vue_is_functional_template__,
         __vue_module_identifier__,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -634,7 +638,7 @@
     var script$1 = {
         name: 'd-alert',
         components: {
-            dButtonClose: dBtnClose
+            dButtonClose: __vue_component__
         },
         props: {
             /**
@@ -849,32 +853,36 @@
       /* style */
       var __vue_inject_styles__$1 = function (inject) {
         if (!inject) { return }
-        inject("data-v-69aee0df_0", { source: "\n.close[data-v-69aee0df] {\n    min-height: 100%;\n    padding: 0.625rem 1.25rem 0.75rem 1.25rem;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/alert/Alert.vue"],"names":[],"mappings":";AAuJA;IACA,gBAAA;IACA,yCAAA;AACA","file":"Alert.vue","sourcesContent":["<template>\n    <div v-if=\"computedShow\"\n        role=\"alert\"\n        aria-live=\"polite\"\n        aria-atomic=\"true\"\n        :class=\"[\n            'alert',\n            theme ? `alert-${theme}` : '',\n            dismissible ? `alert-dismissible` : ''\n        ]\">\n        <slot />\n        <d-button-close v-if=\"dismissible\"\n            :aria-label=\"dismissLabel\"\n            @click=\"dismiss\"\n            href=\"#\" />\n    </div>\n</template>\n\n<script>\nimport { THEMECOLORS, ALERT_EVENTS } from '../../utils/constants';\nimport dButtonClose from '../button/ButtonClose.vue';\n\nexport default {\n    name: 'd-alert',\n    components: {\n        dButtonClose\n    },\n    props: {\n        /**\n         * Alert color theme.\n         */\n        theme: {\n            type: String,\n            default: 'primary',\n            validator: v => THEMECOLORS.includes(v)\n        },\n        /**\n         * Whether the alert is dismissible, or not.\n         */\n        dismissible: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Dismiss button label.\n         */\n        dismissLabel: {\n            type: String,\n            default: 'Close'\n        },\n        /**\n         * Show state or duration.\n         */\n        show: {\n            type: [Boolean, Number, String],\n            default: false\n        }\n    },\n    model: {\n        prop: 'show',\n        event: 'input'\n    },\n    data() {\n        return {\n            timer: null,\n            dismissed: false\n        }\n    },\n    watch: {\n        show() {\n            this.showChanged();\n        }\n    },\n    mounted() {\n        this.showChanged();\n    },\n    destroyed() {\n        this.clearCounter();\n    },\n    computed: {\n        computedShow() {\n            return !this.dismissed && (this.timer || this.show);\n        }\n    },\n    methods: {\n        clearCounter() {\n            if (this.timer) {\n                clearInterval(this.timer);\n                this.timer = null;\n            }\n        },\n\n        dismiss() {\n            this.clearCounter();\n            this.dismissed = true;\n\n            /**\n             * Alert dismissed event.\n             *\n             * @event alert-dismissed\n             * @type {Boolean}\n             */\n            this.$emit(ALERT_EVENTS.DISMISSED);\n            this.$emit('input', false);\n\n            if (typeof this.show === 'boolean') {\n                this.$emit('input', false);\n                return;\n            }\n\n            /**\n             * Alert dismiss countdown event.\n             *\n             * @event alert-dismiss-countdown\n             * @type {Number}\n             */\n            this.$emit(ALERT_EVENTS.DISMISS_COUNTDOWN, 0);\n            this.$emit('input', 0);\n        },\n\n        showChanged() {\n            this.clearCounter();\n            this.dismissed = false;\n\n            if (typeof this.show === 'boolean' || this.show === null || this.show === 0)\n                return\n\n            let dismissTimer = this.show;\n            this.timer = setInterval(() => {\n                if (dismissTimer < 1) {\n                    this.dismiss();\n                    return;\n                }\n\n                dismissTimer--;\n\n                /**\n                 * Alert dismiss countdown event.\n                 *\n                 * @event alert-dismiss-countdown\n                 * @type {Number}\n                 */\n                this.$emit(ALERT_EVENTS.DISMISS_COUNTDOWN, dismissTimer);\n                this.$emit('input', dismissTimer);\n            }, 1000);\n        }\n    }\n}\n</script>\n\n<style scoped>\n.close {\n    min-height: 100%;\n    padding: 0.625rem 1.25rem 0.75rem 1.25rem;\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-252b0a4a_0", { source: "\n.close[data-v-252b0a4a] {\n    min-height: 100%;\n    padding: 0.625rem 1.25rem 0.75rem 1.25rem;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/alert/Alert.vue"],"names":[],"mappings":";AAuJA;IACA,gBAAA;IACA,yCAAA;AACA","file":"Alert.vue","sourcesContent":["<template>\n    <div v-if=\"computedShow\"\n        role=\"alert\"\n        aria-live=\"polite\"\n        aria-atomic=\"true\"\n        :class=\"[\n            'alert',\n            theme ? `alert-${theme}` : '',\n            dismissible ? `alert-dismissible` : ''\n        ]\">\n        <slot />\n        <d-button-close v-if=\"dismissible\"\n            :aria-label=\"dismissLabel\"\n            @click=\"dismiss\"\n            href=\"#\" />\n    </div>\n</template>\n\n<script>\nimport { THEMECOLORS, ALERT_EVENTS } from '../../utils/constants';\nimport dButtonClose from '../button/ButtonClose.vue';\n\nexport default {\n    name: 'd-alert',\n    components: {\n        dButtonClose\n    },\n    props: {\n        /**\n         * Alert color theme.\n         */\n        theme: {\n            type: String,\n            default: 'primary',\n            validator: v => THEMECOLORS.includes(v)\n        },\n        /**\n         * Whether the alert is dismissible, or not.\n         */\n        dismissible: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Dismiss button label.\n         */\n        dismissLabel: {\n            type: String,\n            default: 'Close'\n        },\n        /**\n         * Show state or duration.\n         */\n        show: {\n            type: [Boolean, Number, String],\n            default: false\n        }\n    },\n    model: {\n        prop: 'show',\n        event: 'input'\n    },\n    data() {\n        return {\n            timer: null,\n            dismissed: false\n        }\n    },\n    watch: {\n        show() {\n            this.showChanged();\n        }\n    },\n    mounted() {\n        this.showChanged();\n    },\n    destroyed() {\n        this.clearCounter();\n    },\n    computed: {\n        computedShow() {\n            return !this.dismissed && (this.timer || this.show);\n        }\n    },\n    methods: {\n        clearCounter() {\n            if (this.timer) {\n                clearInterval(this.timer);\n                this.timer = null;\n            }\n        },\n\n        dismiss() {\n            this.clearCounter();\n            this.dismissed = true;\n\n            /**\n             * Alert dismissed event.\n             *\n             * @event alert-dismissed\n             * @type {Boolean}\n             */\n            this.$emit(ALERT_EVENTS.DISMISSED);\n            this.$emit('input', false);\n\n            if (typeof this.show === 'boolean') {\n                this.$emit('input', false);\n                return;\n            }\n\n            /**\n             * Alert dismiss countdown event.\n             *\n             * @event alert-dismiss-countdown\n             * @type {Number}\n             */\n            this.$emit(ALERT_EVENTS.DISMISS_COUNTDOWN, 0);\n            this.$emit('input', 0);\n        },\n\n        showChanged() {\n            this.clearCounter();\n            this.dismissed = false;\n\n            if (typeof this.show === 'boolean' || this.show === null || this.show === 0)\n                return\n\n            let dismissTimer = this.show;\n            this.timer = setInterval(() => {\n                if (dismissTimer < 1) {\n                    this.dismiss();\n                    return;\n                }\n\n                dismissTimer--;\n\n                /**\n                 * Alert dismiss countdown event.\n                 *\n                 * @event alert-dismiss-countdown\n                 * @type {Number}\n                 */\n                this.$emit(ALERT_EVENTS.DISMISS_COUNTDOWN, dismissTimer);\n                this.$emit('input', dismissTimer);\n            }, 1000);\n        }\n    }\n}\n</script>\n\n<style scoped>\n.close {\n    min-height: 100%;\n    padding: 0.625rem 1.25rem 0.75rem 1.25rem;\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$1 = "data-v-69aee0df";
+      var __vue_scope_id__$1 = "data-v-252b0a4a";
       /* module identifier */
       var __vue_module_identifier__$1 = undefined;
       /* functional template */
       var __vue_is_functional_template__$1 = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dAlert = normalizeComponent_1(
+      var __vue_component__$1 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
         __vue_inject_styles__$1,
         __vue_script__$1,
         __vue_scope_id__$1,
         __vue_is_functional_template__$1,
         __vue_module_identifier__$1,
+        false,
         browser,
+        undefined,
         undefined
       );
 
     var components = {
-        dAlert: dAlert
+        dAlert: __vue_component__$1
     };
 
     var VuePlugin = {
@@ -1113,15 +1121,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dLink = normalizeComponent_1(
+      var __vue_component__$2 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
         __vue_inject_styles__$2,
         __vue_script__$2,
         __vue_scope_id__$2,
         __vue_is_functional_template__$2,
         __vue_module_identifier__$2,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -1189,7 +1201,7 @@
     var script$3 = {
         name: 'd-badge',
         components: {
-            dLink: dLink
+            dLink: __vue_component__$2
         },
         props: Object.assign({}, createLinkProps(), {tag: {
                 type: String,
@@ -1262,21 +1274,25 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dBadge = normalizeComponent_1(
+      var __vue_component__$3 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
         __vue_inject_styles__$3,
         __vue_script__$3,
         __vue_scope_id__$3,
         __vue_is_functional_template__$3,
         __vue_module_identifier__$3,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$1 = {
-        dBadge: dBadge
+        dBadge: __vue_component__$3
     };
 
     var VuePlugin$1 = {
@@ -1295,7 +1311,7 @@
     var script$4 = {
         name: 'd-breadcrumb-link',
         components: {
-            dLink: dLink
+            dLink: __vue_component__$2
         },
         props: Object.assign({}, createLinkProps(), {text: {
                 type: String,
@@ -1358,15 +1374,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var BreadcrumbLink = normalizeComponent_1(
+      var __vue_component__$4 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
         __vue_inject_styles__$4,
         __vue_script__$4,
         __vue_scope_id__$4,
         __vue_is_functional_template__$4,
         __vue_module_identifier__$4,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -1376,7 +1396,7 @@
     var script$5 = {
         name: 'd-breadcrumb-item',
         components: {
-            BreadcrumbLink: BreadcrumbLink
+            BreadcrumbLink: __vue_component__$4
         },
         props: {
             /**
@@ -1442,15 +1462,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var BreadcrumbItem = normalizeComponent_1(
+      var __vue_component__$5 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
         __vue_inject_styles__$5,
         __vue_script__$5,
         __vue_scope_id__$5,
         __vue_is_functional_template__$5,
         __vue_module_identifier__$5,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -1460,7 +1484,7 @@
     var script$6 = {
         name: 'd-breadcrumb',
         components: {
-            BreadcrumbItem: BreadcrumbItem
+            BreadcrumbItem: __vue_component__$5
         },
         props: {
             /**
@@ -1539,24 +1563,28 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dBreadcrumb = normalizeComponent_1(
+      var __vue_component__$6 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
         __vue_inject_styles__$6,
         __vue_script__$6,
         __vue_scope_id__$6,
         __vue_is_functional_template__$6,
         __vue_module_identifier__$6,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$2 = {
-        dLink: dLink,
-        dBreadcrumb: dBreadcrumb,
-        dBreadcrumbItem: BreadcrumbItem,
-        dBreadcrumbLink: BreadcrumbLink
+        dLink: __vue_component__$2,
+        dBreadcrumb: __vue_component__$6,
+        dBreadcrumbItem: __vue_component__$5,
+        dBreadcrumbLink: __vue_component__$4
     };
 
     var VuePlugin$2 = {
@@ -1698,24 +1726,28 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dButton = normalizeComponent_1(
+      var __vue_component__$7 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
         __vue_inject_styles__$7,
         __vue_script__$7,
         __vue_scope_id__$7,
         __vue_is_functional_template__$7,
         __vue_module_identifier__$7,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$3 = {
-        dButton: dButton,
-        dBtn: dButton,
-        dButtonClose: dBtnClose,
-        dBtnClose: dBtnClose
+        dButton: __vue_component__$7,
+        dBtn: __vue_component__$7,
+        dButtonClose: __vue_component__,
+        dBtnClose: __vue_component__
     };
 
     var VuePlugin$3 = {
@@ -1811,33 +1843,37 @@
       /* style */
       var __vue_inject_styles__$8 = function (inject) {
         if (!inject) { return }
-        inject("data-v-10262502_0", { source: ".btn-group-vertical .btn + .btn[data-v-10262502] {\n  margin-left: 0 !important;\n}\n\n/*# sourceMappingURL=ButtonGroup.vue.map */", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/button-group/ButtonGroup.vue","ButtonGroup.vue"],"names":[],"mappings":"AA6DA;EACA,yBAAA;AAAA;;AC3DA,0CAA0C","file":"ButtonGroup.vue","sourcesContent":["<template>\n    <div :class=\"[\n            btnGroupSizeClass,\n            vertical ? 'btn-group-vertical' : 'btn-group'\n        ]\"\n        :aria-role=\"ariaRole\"\n        :aria-label=\"ariaLabel\">\n        <slot />\n    </div>\n</template>\n\n<script>\nexport default {\n    name: 'd-button-group',\n    props: {\n        /**\n         * Whether it is a vertical button group, or not.\n         */\n        vertical: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The button group size.\n         */\n        size: {\n            type: String,\n            validator: v => ['small', 'large', null].includes(v),\n            default: null\n        },\n        /**\n         * The button group's aria role.\n         */\n        ariaRole: {\n            type: String,\n            default: 'group'\n        },\n        /**\n         * The button group's aria label.\n         */\n        ariaLabel: {\n            type: String,\n            default: 'Button group'\n        }\n    },\n    computed: {\n        btnGroupSizeClass() {\n            const buttonGroupSizes = { small: 'sm', large: 'lg' };\n\n            if (this.size !== '') {\n                return `btn-group-${buttonGroupSizes[this.size]}`;\n            }\n\n            return this.size;\n        }\n    }\n}\n</script>\n\n<style lang=\"scss\" scoped>\n    // TODO: This should be fixed in Shards.\n    .btn-group-vertical .btn + .btn {\n        margin-left: 0 !important;\n    }\n</style>\n\n",".btn-group-vertical .btn + .btn {\n  margin-left: 0 !important; }\n\n/*# sourceMappingURL=ButtonGroup.vue.map */"]}, media: undefined });
+        inject("data-v-43c19f0a_0", { source: ".btn-group-vertical .btn + .btn[data-v-43c19f0a] {\n  margin-left: 0 !important;\n}\n\n/*# sourceMappingURL=ButtonGroup.vue.map */", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/button-group/ButtonGroup.vue","ButtonGroup.vue"],"names":[],"mappings":"AA6DA;EACA,yBAAA;AC5DA;;AAEA,0CAA0C","file":"ButtonGroup.vue","sourcesContent":["<template>\n    <div :class=\"[\n            btnGroupSizeClass,\n            vertical ? 'btn-group-vertical' : 'btn-group'\n        ]\"\n        :aria-role=\"ariaRole\"\n        :aria-label=\"ariaLabel\">\n        <slot />\n    </div>\n</template>\n\n<script>\nexport default {\n    name: 'd-button-group',\n    props: {\n        /**\n         * Whether it is a vertical button group, or not.\n         */\n        vertical: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The button group size.\n         */\n        size: {\n            type: String,\n            validator: v => ['small', 'large', null].includes(v),\n            default: null\n        },\n        /**\n         * The button group's aria role.\n         */\n        ariaRole: {\n            type: String,\n            default: 'group'\n        },\n        /**\n         * The button group's aria label.\n         */\n        ariaLabel: {\n            type: String,\n            default: 'Button group'\n        }\n    },\n    computed: {\n        btnGroupSizeClass() {\n            const buttonGroupSizes = { small: 'sm', large: 'lg' };\n\n            if (this.size !== '') {\n                return `btn-group-${buttonGroupSizes[this.size]}`;\n            }\n\n            return this.size;\n        }\n    }\n}\n</script>\n\n<style lang=\"scss\" scoped>\n    // TODO: This should be fixed in Shards.\n    .btn-group-vertical .btn + .btn {\n        margin-left: 0 !important;\n    }\n</style>\n\n",".btn-group-vertical .btn + .btn {\n  margin-left: 0 !important;\n}\n\n/*# sourceMappingURL=ButtonGroup.vue.map */"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$8 = "data-v-10262502";
+      var __vue_scope_id__$8 = "data-v-43c19f0a";
       /* module identifier */
       var __vue_module_identifier__$8 = undefined;
       /* functional template */
       var __vue_is_functional_template__$8 = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dButtonGroup = normalizeComponent_1(
+      var __vue_component__$8 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
         __vue_inject_styles__$8,
         __vue_script__$8,
         __vue_scope_id__$8,
         __vue_is_functional_template__$8,
         __vue_module_identifier__$8,
+        false,
         browser,
+        undefined,
         undefined
       );
 
     var components$4 = {
-        dButtonGroup: dButtonGroup,
-        sBtnGroup: dButtonGroup
+        dButtonGroup: __vue_component__$8,
+        sBtnGroup: __vue_component__$8
     };
 
     var VuePlugin$4 = {
@@ -1910,22 +1946,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dButtonToolbar = normalizeComponent_1(
+      var __vue_component__$9 = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
         __vue_inject_styles__$9,
         __vue_script__$9,
         __vue_scope_id__$9,
         __vue_is_functional_template__$9,
         __vue_module_identifier__$9,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$5 = {
-        dButtonToolbar: dButtonToolbar,
-        dBtnToolbar: dButtonToolbar
+        dButtonToolbar: __vue_component__$9,
+        dBtnToolbar: __vue_component__$9
     };
 
     var VuePlugin$5 = {
@@ -2040,15 +2080,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCard = normalizeComponent_1(
+      var __vue_component__$a = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
         __vue_inject_styles__$a,
         __vue_script__$a,
         __vue_scope_id__$a,
         __vue_is_functional_template__$a,
         __vue_module_identifier__$a,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -2203,15 +2247,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCardBody = normalizeComponent_1(
+      var __vue_component__$b = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
         __vue_inject_styles__$b,
         __vue_script__$b,
         __vue_scope_id__$b,
         __vue_is_functional_template__$b,
         __vue_module_identifier__$b,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -2316,15 +2364,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCardFooter = normalizeComponent_1(
+      var __vue_component__$c = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
         __vue_inject_styles__$c,
         __vue_script__$c,
         __vue_scope_id__$c,
         __vue_is_functional_template__$c,
         __vue_module_identifier__$c,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -2406,15 +2458,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCardGroup = normalizeComponent_1(
+      var __vue_component__$d = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
         __vue_inject_styles__$d,
         __vue_script__$d,
         __vue_scope_id__$d,
         __vue_is_functional_template__$d,
         __vue_module_identifier__$d,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -2519,15 +2575,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCardHeader = normalizeComponent_1(
+      var __vue_component__$e = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
         __vue_inject_styles__$e,
         __vue_script__$e,
         __vue_scope_id__$e,
         __vue_is_functional_template__$e,
         __vue_module_identifier__$e,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -2624,26 +2684,30 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCardImg = normalizeComponent_1(
+      var __vue_component__$f = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
         __vue_inject_styles__$f,
         __vue_script__$f,
         __vue_scope_id__$f,
         __vue_is_functional_template__$f,
         __vue_module_identifier__$f,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$6 = {
-        dCard: dCard,
-        dCardBody: dCardBody,
-        dCardFooter: dCardFooter,
-        dCardGroup: dCardGroup,
-        dCardHeader: dCardHeader,
-        dCardImg: dCardImg
+        dCard: __vue_component__$a,
+        dCardBody: __vue_component__$b,
+        dCardFooter: __vue_component__$c,
+        dCardGroup: __vue_component__$d,
+        dCardHeader: __vue_component__$e,
+        dCardImg: __vue_component__$f
     };
 
     var VuePlugin$6 = {
@@ -2901,21 +2965,25 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCollapse = normalizeComponent_1(
+      var __vue_component__$g = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
         __vue_inject_styles__$g,
         __vue_script__$g,
         __vue_scope_id__$g,
         __vue_is_functional_template__$g,
         __vue_module_identifier__$g,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$7 = {
-        dCollapse: dCollapse
+        dCollapse: __vue_component__$g
     };
 
     var VuePlugin$7 = {
@@ -2986,15 +3054,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dContainer = normalizeComponent_1(
+      var __vue_component__$h = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
         __vue_inject_styles__$h,
         __vue_script__$h,
         __vue_scope_id__$h,
         __vue_is_functional_template__$h,
         __vue_module_identifier__$h,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -3101,15 +3173,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dRow = normalizeComponent_1(
+      var __vue_component__$i = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
         __vue_inject_styles__$i,
         __vue_script__$i,
         __vue_scope_id__$i,
         __vue_is_functional_template__$i,
         __vue_module_identifier__$i,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -3288,23 +3364,27 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dCol = normalizeComponent_1(
+      var __vue_component__$j = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
         __vue_inject_styles__$j,
         __vue_script__$j,
         __vue_scope_id__$j,
         __vue_is_functional_template__$j,
         __vue_module_identifier__$j,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$8 = {
-        dContainer: dContainer,
-        dRow: dRow,
-        dCol: dCol,
+        dContainer: __vue_component__$h,
+        dRow: __vue_component__$i,
+        dCol: __vue_component__$j,
     };
 
     var VuePlugin$8 = {
@@ -3542,7 +3622,7 @@
       /* style */
       var __vue_inject_styles__$k = function (inject) {
         if (!inject) { return }
-        inject("data-v-185c8ca8_0", { source: "div.vdp-datepicker__calendar {\n  color: #5a6169;\n  padding: 20px 22px;\n  min-width: 10rem;\n  font-size: 1rem;\n  font-weight: 300;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.05);\n  border-radius: 0.375rem;\n  box-shadow: 0 0.5rem 4rem rgba(0, 0, 0, 0.11), 0 10px 20px rgba(0, 0, 0, 0.05), 0 2px 3px rgba(0, 0, 0, 0.06);\n  border: 1px solid rgba(0, 0, 0, 0.15) !important;\n}\ndiv.vdp-datepicker__calendar header {\n    display: flex;\n    padding-bottom: 10px;\n}\ndiv.vdp-datepicker__calendar header span {\n      transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n      border-radius: 0.375rem;\n      font-weight: 500;\n}\ndiv.vdp-datepicker__calendar header span.next:after {\n        border-left-color: #c3c7cc;\n}\ndiv.vdp-datepicker__calendar header span.prev:after {\n        border-right-color: #c3c7cc;\n}\ndiv.vdp-datepicker__calendar header span:hover,\n  div.vdp-datepicker__calendar .cell.day:not(.disabled):not(.blank):hover, div.vdp-datepicker__calendar .cell.month:hover, div.vdp-datepicker__calendar .cell.year:hover {\n    background-color: #eceeef;\n    border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell {\n    line-height: 2;\n    font-size: 1rem;\n    border-radius: 0.375rem;\n    transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n    border-color: transparent;\n    height: auto;\n}\ndiv.vdp-datepicker__calendar .cell.day-header {\n      font-weight: 500;\n}\ndiv.vdp-datepicker__calendar .cell.day {\n      width: 36px;\n      height: 36px;\n      border-radius: 50%;\n}\ndiv.vdp-datepicker__calendar .cell.month, div.vdp-datepicker__calendar .cell.year {\n      height: 36px;\n      font-size: 12px;\n      line-height: 33px;\n}\ndiv.vdp-datepicker__calendar .cell.selected, div.vdp-datepicker__calendar .cell.highlighted.selected {\n      background: #007bff !important;\n      color: #fff;\n}\ndiv.vdp-datepicker__calendar .cell.selected:hover, div.vdp-datepicker__calendar .cell.highlighted.selected:hover {\n        background: #006fe6 !important;\n        border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted {\n      background: #007bff;\n      color: #fff;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted:hover {\n        background: #006fe6 !important;\n        border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted:not(.highlight-start):not(.highlight-end) {\n        border-radius: 0;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted.highlight-start {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted.highlight-end {\n        border-top-left-radius: 0;\n        border-bottom-left-radius: 0;\n}\ndiv.vdp-datepicker__small {\n  padding: 0.625rem 0.625rem;\n  font-size: 0.75rem;\n  max-width: 235px;\n}\ndiv.vdp-datepicker__small .cell.day {\n    width: 1.875rem;\n    height: 1.875rem;\n    line-height: 2.25;\n}\ndiv.vdp-datepicker__small .cell.day, div.vdp-datepicker__small .cell.month, div.vdp-datepicker__small .cell.year {\n    font-size: 12px;\n    font-weight: 500;\n}\ndiv.vdp-datepicker__small .cell.day-header {\n    font-size: 100%;\n}\n\n/*# sourceMappingURL=Datepicker.vue.map */", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/datepicker/Datepicker.vue","Datepicker.vue"],"names":[],"mappings":"AA4PA;EAEA,cA1CA;EA2CA,kBA9BA;EA+BA,gBAnCA;EAoCA,eAjCA;EAkCA,gBA/BA;EAgCA,iKAzCA;EA0CA,sBArDA;EAsDA,qCArDA;EAsDA,uBA9CA;EA+CA,6GAvDA;EAwDA,gDAAA;AAAA;AAZA;IAgBA,aAAA;IACA,oBAAA;AAAA;AAjBA;MAoBA,0DAvDA;MAwDA,uBAzDA;MA0DA,gBAAA;AAAA;AAtBA;QAyBA,0BAnEA;AAAA;AA0CA;QA6BA,2BAvEA;AAAA;AA0CA;;IAsCA,yBA7EA;IA8EA,oCAAA;AAAA;AAvCA;IA6CA,cA7DA;IA8DA,eA7DA;IA8DA,uBAnFA;IAoFA,0DAnFA;IAoFA,yBAtFA;IAuFA,YAAA;AAAA;AAlDA;MAsDA,gBAAA;AAAA;AAtDA;MA2DA,WA9EA;MA+EA,YA9EA;MA+EA,kBAAA;AAAA;AA7DA;MAmEA,YArFA;MAsFA,eAAA;MACA,iBAAA;AAAA;AArEA;MA2EA,8BAAA;MACA,WAzHA;AAAA;AA6CA;QA8EA,8BAAA;QACA,oCAAA;AAAA;AA/EA;MAoFA,mBA7HA;MA8HA,WAlIA;AAAA;AA6CA;QAwFA,8BAAA;QACA,oCAAA;AAAA;AAzFA;QA6FA,gBAAA;AAAA;AA7FA;QAiGA,0BAAA;QACA,6BAAA;AAAA;AAlGA;QAsGA,yBAAA;QACA,4BAAA;AAAA;AAvGA;EA+GA,0BA3HA;EA4HA,kBA3HA;EA4HA,gBA3HA;AAAA;AAUA;IAqHA,eA3HA;IA4HA,gBA3HA;IA4HA,iBA3HA;AAAA;AAIA;IA6HA,eArIA;IAsIA,gBArIA;AAAA;AAOA;IAkIA,eApIA;AAAA;;AC3KA,yCAAyC","file":"Datepicker.vue","sourcesContent":["<template>\n    <VueDatepicker\n        :value=\"value\"\n        :name=\"name\"\n        :id=\"id\"\n        :format=\"format\"\n        :language=\"language\"\n        :open-date=\"openDate\"\n        :day-cell-content=\"dayCellContent\"\n        :full-month-name=\"fullMonthName\"\n        :disabled-dates=\"disabledDates\"\n        :highlighted=\"highlighted\"\n        :placeholder=\"placeholder\"\n        :inline=\"inline\"\n        :calendar-class=\"computedCalendarClass\"\n        :input-class=\"inputClass\"\n        :wrapper-class=\"wrapperClass\"\n        :monday-first=\"mondayFirst\"\n        :clear-button=\"clearButton\"\n        :clear-button-icon=\"clearButtonIcon\"\n        :calendar-button=\"calendarButton\"\n        :calendar-button-icon=\"calendarButtonIcon\"\n        :calendar-button-icon-content=\"calendarButtonIconContent\"\n        :initial-view=\"initialView\"\n        :disabled=\"disabled\"\n        :required=\"required\"\n        :typeable=\"typeable\"\n        :use-utc=\"useUtc\"\n        :minimum-view=\"minimumView\"\n        :maximum-view=\"maximumView\"\n        v-on=\"$listeners\">\n            <slot name=\"beforeCalendarHeader\" slot=\"beforeCalendarHeader\" />\n            <slot name=\"afterDateInput\" slot=\"afterDateInput\" />\n    </VueDatepicker>\n</template>\n\n<script>\nimport VueDatepicker from 'vuejs-datepicker'\n\n// Validator function that checks the date props.\nconst _datePropValidator = (v) => {\n    return v === null\n            || v instanceof Date\n            || typeof v === 'string'\n            || typeof v === 'number'\n}\n\nexport default {\n    name: 'd-datepicker',\n    components: { VueDatepicker },\n    props: {\n        /**\n         * The datepicker's value.\n         */\n        value: {\n            validator: _datePropValidator\n        },\n        /**\n         * The name.\n         */\n        name: {\n            type: String,\n            default: null\n        },\n        /**\n         * The component's ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The date format.\n         */\n        format: {\n            type: [String, Function],\n            default: 'dd MMM yyyy'\n        },\n        /**\n         * The language.\n         */\n        language: Object,\n        /**\n         * If set, the datepicker will open on this date.\n         */\n        openDate: {\n            validator: _datePropValidator\n        },\n        /**\n         * Function used to render custom content inside the day cell.\n         */\n        dayCellContent: Function,\n        /**\n         * Whether to show the full month name, or not.\n         */\n        fullMonthName: Boolean,\n        /**\n         * Configure disabled dates.\n         */\n        disabledDates: Object,\n        /**\n         * Highlight dates.\n         */\n        highlighted: Object,\n        /**\n         * The placeholder.\n         */\n        placeholder: String,\n        /**\n         * Show the datepicker always open.\n         */\n        inline: Boolean,\n        /**\n         * The CSS class applied to the calendar element.\n         */\n        calendarClass: {\n            type: [String, Object, Array],\n            default: ''\n        },\n        /**\n         * The CSS Class applied to the input element.\n         */\n        inputClass: {\n            type: [String, Object, Array],\n            default: 'form-control'\n        },\n        /**\n         * The CSS class applied to the wrapper element.\n         */\n        wrapperClass: [String, Object, Array],\n        /**\n         * Whether Monday is the first day, or not.\n         */\n        mondayFirst: Boolean,\n        /**\n         * Display a button for clearing the dates.\n         */\n        clearButton: Boolean,\n        /**\n         * Use an icon for the clear button.\n         */\n        clearButtonIcon: String,\n        /**\n         * Dislay a calendar button.\n         */\n        calendarButton: Boolean,\n        /**\n         * The calendar button's icon.\n         */\n        calendarButtonIcon: String,\n        /**\n         * The calendar button's icon content.\n         */\n        calendarButtonIconContent: String,\n        /**\n         * If set, the datepicker is opened on that specific view.\n         */\n        initialView: String,\n        /**\n         * The disabled state.\n         */\n        disabled: Boolean,\n        /**\n         * The required state.\n         */\n        required: Boolean,\n        /**\n         * Whether to allow users to type the date, or not.\n         */\n        typeable: Boolean,\n        /**\n         * Use UTC for time calculations.\n         */\n        useUtc: Boolean,\n        /**\n         * If set, the lower-level views will not be shown.\n         */\n        minimumView: {\n            type: String,\n            default: 'day'\n        },\n        /**\n         * If set, the higher-level views will not be shown.\n         */\n        maximumView: {\n            type: String,\n            default: 'year'\n        },\n        /**\n         * Whether the datepicker should be small, or not.\n         */\n        small: {\n            type: Boolean,\n            default: false\n        }\n    },\n    computed: {\n        computedCalendarClass() {\n            let _calendarClass = this.small ? 'vdp-datepicker__small' : ''\n\n            return _calendarClass += this.calendarClass\n        }\n    }\n}\n</script>\n\n<style lang=\"scss\">\n    $white: #fff;\n    $black: #000;\n\n    $color-silver-sand: #c3c7cc;\n    $color-primary: #007bff;\n    $color-shuttle-gray: #5a6169;\n    $color-porcelain: #eceeef;\n\n    $border-color: transparent;\n    $border-radius-default: .375rem;\n    $transition-default: all 250ms cubic-bezier(.27,.01,.38,1.06);\n    $font-system: -apple-system, BlinkMacSystemFont,  \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n\n    $datepicker-color: $color-shuttle-gray;\n    $datepicker-min-width: 10rem;\n    $datepicker-background-color: $white;\n    $datepicker-border-radius: $border-radius-default;\n    $datepicker-font-size: 1rem;\n    $datepicker-padding-x: 22px;\n    $datepicker-padding-y: 20px;\n    $datepicker-font-weight: 300;\n    $datepicker-border: 1px solid rgba($black,.05);\n    $datepicker-drop-shadows: 0 0.5rem 4rem rgba($black,.11),\n                            0 10px 20px rgba($black,.05),\n                            0 2px 3px rgba($black,.06);\n\n    $datepicker-cell-width: 36px;\n    $datepicker-cell-height: 36px;\n    $datepicker-cell-hover-color: $color-porcelain;\n    $datepicker-cell-line-height: 2;\n    $datepicker-cell-font-size: 1rem;\n\n    $datepicker-small-padding-y: .625rem;\n    $datepicker-small-padding-x: .625rem;\n    $datepicker-small-font-size: .75rem;\n    $datepicker-small-max-width: 235px;\n\n    $datepicker-small-day-font-size: 12px;\n    $datepicker-small-day-font-weight: 500;\n    $datepicker-small-day-width: 1.875rem;\n    $datepicker-small-day-height: 1.875rem;\n    $datepicker-small-day-line-height: 2.25;\n\n    $datepicker-small-day-header-font-size: 100%;\n\n    div.vdp-datepicker {\n        &__calendar {\n            color: $datepicker-color;\n            padding: $datepicker-padding-y $datepicker-padding-x;\n            min-width: $datepicker-min-width;\n            font-size: $datepicker-font-size;\n            font-weight: $datepicker-font-weight;\n            font-family: $font-system;\n            background-color: $datepicker-background-color;\n            border: $datepicker-border;\n            border-radius: $datepicker-border-radius;\n            box-shadow: $datepicker-drop-shadows;\n            border: 1px solid rgba($black,.15) !important;\n\n            // Header\n            header {\n                display: flex;\n                padding-bottom: 10px;\n\n                span {\n                    transition: $transition-default;\n                    border-radius: $border-radius-default;\n                    font-weight: 500;\n\n                    &.next:after {\n                        border-left-color: $color-silver-sand;\n                    }\n\n                    &.prev:after {\n                        border-right-color: $color-silver-sand;\n                    }\n                }\n            }\n\n            // Header elements and specific calendar cells.\n            header span,\n            .cell.day:not(.disabled):not(.blank), .cell.month, .cell.year {\n                &:hover {\n                    background-color: $datepicker-cell-hover-color;\n                    border-color: $border-color !important;\n                }\n            }\n\n            // Cells\n            .cell {\n                line-height: $datepicker-cell-line-height;\n                font-size: $datepicker-cell-font-size;\n                border-radius: $border-radius-default;\n                transition: $transition-default;\n                border-color: $border-color;\n                height: auto;\n\n                // Day headers\n                &.day-header {\n                    font-weight: 500;\n                }\n\n                // Days\n                &.day {\n                    width: $datepicker-cell-width;\n                    height: $datepicker-cell-height;\n                    border-radius: 50%;\n                }\n\n                // Months\n                &.month,\n                &.year {\n                    height: $datepicker-cell-height;\n                    font-size: 12px;\n                    line-height: 33px;\n                }\n\n                // Selected\n                &.selected,\n                &.highlighted.selected {\n                    background: $color-primary !important;\n                    color: $white;\n                    &:hover {\n                        background: darken($color-primary, 5) !important;\n                        border-color: $border-color !important;\n                    }\n                }\n\n                &.highlighted {\n                    background: $color-primary;\n                    color: $white;\n\n                    &:hover {\n                        background: darken($color-primary, 5) !important;\n                        border-color: $border-color !important;\n                    }\n\n                    &:not(.highlight-start):not(.highlight-end) {\n                        border-radius: 0;\n                    }\n\n                    &.highlight-start {\n                        border-top-right-radius: 0;\n                        border-bottom-right-radius: 0;\n                    }\n\n                    &.highlight-end {\n                        border-top-left-radius: 0;\n                        border-bottom-left-radius: 0;\n                    }\n                }\n            }\n        }\n\n        // Small Datepicker modifier.\n        &__small {\n            padding: $datepicker-small-padding-y $datepicker-small-padding-x;\n            font-size: $datepicker-small-font-size;\n            max-width: $datepicker-small-max-width;\n\n            .cell {\n                &.day {\n                    width: $datepicker-small-day-width;\n                    height: $datepicker-small-day-height;\n                    line-height: $datepicker-small-day-line-height;\n                }\n\n                &.day,\n                &.month,\n                &.year {\n                    font-size: $datepicker-small-day-font-size;\n                    font-weight: $datepicker-small-day-font-weight;\n                }\n\n                &.day-header {\n                    font-size: $datepicker-small-day-header-font-size;\n                }\n            }\n        }\n    }\n</style>\n\n\n","div.vdp-datepicker__calendar {\n  color: #5a6169;\n  padding: 20px 22px;\n  min-width: 10rem;\n  font-size: 1rem;\n  font-weight: 300;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.05);\n  border-radius: 0.375rem;\n  box-shadow: 0 0.5rem 4rem rgba(0, 0, 0, 0.11), 0 10px 20px rgba(0, 0, 0, 0.05), 0 2px 3px rgba(0, 0, 0, 0.06);\n  border: 1px solid rgba(0, 0, 0, 0.15) !important; }\n  div.vdp-datepicker__calendar header {\n    display: flex;\n    padding-bottom: 10px; }\n    div.vdp-datepicker__calendar header span {\n      transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n      border-radius: 0.375rem;\n      font-weight: 500; }\n      div.vdp-datepicker__calendar header span.next:after {\n        border-left-color: #c3c7cc; }\n      div.vdp-datepicker__calendar header span.prev:after {\n        border-right-color: #c3c7cc; }\n  div.vdp-datepicker__calendar header span:hover,\n  div.vdp-datepicker__calendar .cell.day:not(.disabled):not(.blank):hover, div.vdp-datepicker__calendar .cell.month:hover, div.vdp-datepicker__calendar .cell.year:hover {\n    background-color: #eceeef;\n    border-color: transparent !important; }\n  div.vdp-datepicker__calendar .cell {\n    line-height: 2;\n    font-size: 1rem;\n    border-radius: 0.375rem;\n    transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n    border-color: transparent;\n    height: auto; }\n    div.vdp-datepicker__calendar .cell.day-header {\n      font-weight: 500; }\n    div.vdp-datepicker__calendar .cell.day {\n      width: 36px;\n      height: 36px;\n      border-radius: 50%; }\n    div.vdp-datepicker__calendar .cell.month, div.vdp-datepicker__calendar .cell.year {\n      height: 36px;\n      font-size: 12px;\n      line-height: 33px; }\n    div.vdp-datepicker__calendar .cell.selected, div.vdp-datepicker__calendar .cell.highlighted.selected {\n      background: #007bff !important;\n      color: #fff; }\n      div.vdp-datepicker__calendar .cell.selected:hover, div.vdp-datepicker__calendar .cell.highlighted.selected:hover {\n        background: #006fe6 !important;\n        border-color: transparent !important; }\n    div.vdp-datepicker__calendar .cell.highlighted {\n      background: #007bff;\n      color: #fff; }\n      div.vdp-datepicker__calendar .cell.highlighted:hover {\n        background: #006fe6 !important;\n        border-color: transparent !important; }\n      div.vdp-datepicker__calendar .cell.highlighted:not(.highlight-start):not(.highlight-end) {\n        border-radius: 0; }\n      div.vdp-datepicker__calendar .cell.highlighted.highlight-start {\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0; }\n      div.vdp-datepicker__calendar .cell.highlighted.highlight-end {\n        border-top-left-radius: 0;\n        border-bottom-left-radius: 0; }\n\ndiv.vdp-datepicker__small {\n  padding: 0.625rem 0.625rem;\n  font-size: 0.75rem;\n  max-width: 235px; }\n  div.vdp-datepicker__small .cell.day {\n    width: 1.875rem;\n    height: 1.875rem;\n    line-height: 2.25; }\n  div.vdp-datepicker__small .cell.day, div.vdp-datepicker__small .cell.month, div.vdp-datepicker__small .cell.year {\n    font-size: 12px;\n    font-weight: 500; }\n  div.vdp-datepicker__small .cell.day-header {\n    font-size: 100%; }\n\n/*# sourceMappingURL=Datepicker.vue.map */"]}, media: undefined });
+        inject("data-v-38df16a8_0", { source: "div.vdp-datepicker__calendar {\n  color: #5a6169;\n  padding: 20px 22px;\n  min-width: 10rem;\n  font-size: 1rem;\n  font-weight: 300;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.05);\n  border-radius: 0.375rem;\n  box-shadow: 0 0.5rem 4rem rgba(0, 0, 0, 0.11), 0 10px 20px rgba(0, 0, 0, 0.05), 0 2px 3px rgba(0, 0, 0, 0.06);\n  border: 1px solid rgba(0, 0, 0, 0.15) !important;\n}\ndiv.vdp-datepicker__calendar header {\n  display: flex;\n  padding-bottom: 10px;\n}\ndiv.vdp-datepicker__calendar header span {\n  transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n  border-radius: 0.375rem;\n  font-weight: 500;\n}\ndiv.vdp-datepicker__calendar header span.next:after {\n  border-left-color: #c3c7cc;\n}\ndiv.vdp-datepicker__calendar header span.prev:after {\n  border-right-color: #c3c7cc;\n}\ndiv.vdp-datepicker__calendar header span:hover,\ndiv.vdp-datepicker__calendar .cell.day:not(.disabled):not(.blank):hover, div.vdp-datepicker__calendar .cell.month:hover, div.vdp-datepicker__calendar .cell.year:hover {\n  background-color: #eceeef;\n  border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell {\n  line-height: 2;\n  font-size: 1rem;\n  border-radius: 0.375rem;\n  transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n  border-color: transparent;\n  height: auto;\n}\ndiv.vdp-datepicker__calendar .cell.day-header {\n  font-weight: 500;\n}\ndiv.vdp-datepicker__calendar .cell.day {\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n}\ndiv.vdp-datepicker__calendar .cell.month, div.vdp-datepicker__calendar .cell.year {\n  height: 36px;\n  font-size: 12px;\n  line-height: 33px;\n}\ndiv.vdp-datepicker__calendar .cell.selected, div.vdp-datepicker__calendar .cell.highlighted.selected {\n  background: #007bff !important;\n  color: #fff;\n}\ndiv.vdp-datepicker__calendar .cell.selected:hover, div.vdp-datepicker__calendar .cell.highlighted.selected:hover {\n  background: #006fe6 !important;\n  border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted {\n  background: #007bff;\n  color: #fff;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted:hover {\n  background: #006fe6 !important;\n  border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted:not(.highlight-start):not(.highlight-end) {\n  border-radius: 0;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted.highlight-start {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted.highlight-end {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\ndiv.vdp-datepicker__small {\n  padding: 0.625rem 0.625rem;\n  font-size: 0.75rem;\n  max-width: 235px;\n}\ndiv.vdp-datepicker__small .cell.day {\n  width: 1.875rem;\n  height: 1.875rem;\n  line-height: 2.25;\n}\ndiv.vdp-datepicker__small .cell.day, div.vdp-datepicker__small .cell.month, div.vdp-datepicker__small .cell.year {\n  font-size: 12px;\n  font-weight: 500;\n}\ndiv.vdp-datepicker__small .cell.day-header {\n  font-size: 100%;\n}\n\n/*# sourceMappingURL=Datepicker.vue.map */", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/datepicker/Datepicker.vue","Datepicker.vue"],"names":[],"mappings":"AA6PA;EACA,cA1CA;EA2CA,kBAAA;EACA,gBAnCA;EAoCA,eAjCA;EAkCA,gBA/BA;EAgCA,iKAzCA;EA0CA,sBArDA;EAsDA,qCAjCA;EAkCA,uBA9CA;EA+CA,6GAlCA;EAmCA,gDAAA;AC5PA;AD+PA;EACA,aAAA;EACA,oBAAA;AC7PA;AD+PA;EACA,0DAvDA;EAwDA,uBAzDA;EA0DA,gBAAA;AC7PA;AD+PA;EACA,0BAnEA;AC1LA;ADgQA;EACA,2BAvEA;ACvLA;ADsQA;;EACA,yBA7EA;EA8EA,oCAAA;ACnQA;ADwQA;EACA,cA7DA;EA8DA,eA7DA;EA8DA,uBAnFA;EAoFA,0DAnFA;EAoFA,yBAtFA;EAuFA,YAAA;ACtQA;ADyQA;EACA,gBAAA;ACvQA;AD2QA;EACA,WA9EA;EA+EA,YA9EA;EA+EA,kBAAA;ACzQA;AD6QA;EAEA,YArFA;EAsFA,eAAA;EACA,iBAAA;AC5QA;ADgRA;EAEA,8BAAA;EACA,WAzHA;ACtJA;ADgRA;EACA,8BAAA;EACA,oCAAA;AC9QA;ADkRA;EACA,mBA7HA;EA8HA,WAlIA;AC9IA;ADkRA;EACA,8BAAA;EACA,oCAAA;AChRA;ADmRA;EACA,gBAAA;ACjRA;ADoRA;EACA,0BAAA;EACA,6BAAA;AClRA;ADqRA;EACA,yBAAA;EACA,4BAAA;ACnRA;AD0RA;EACA,0BAAA;EACA,kBA3HA;EA4HA,gBA3HA;AC7JA;AD2RA;EACA,eA3HA;EA4HA,gBA3HA;EA4HA,iBA3HA;AC9JA;AD4RA;EAGA,eArIA;EAsIA,gBArIA;ACvJA;AD+RA;EACA,eApIA;ACzJA;;AAEA,yCAAyC","file":"Datepicker.vue","sourcesContent":["<template>\n    <VueDatepicker\n        :value=\"value\"\n        :name=\"name\"\n        :id=\"id\"\n        :format=\"format\"\n        :language=\"language\"\n        :open-date=\"openDate\"\n        :day-cell-content=\"dayCellContent\"\n        :full-month-name=\"fullMonthName\"\n        :disabled-dates=\"disabledDates\"\n        :highlighted=\"highlighted\"\n        :placeholder=\"placeholder\"\n        :inline=\"inline\"\n        :calendar-class=\"computedCalendarClass\"\n        :input-class=\"inputClass\"\n        :wrapper-class=\"wrapperClass\"\n        :monday-first=\"mondayFirst\"\n        :clear-button=\"clearButton\"\n        :clear-button-icon=\"clearButtonIcon\"\n        :calendar-button=\"calendarButton\"\n        :calendar-button-icon=\"calendarButtonIcon\"\n        :calendar-button-icon-content=\"calendarButtonIconContent\"\n        :initial-view=\"initialView\"\n        :disabled=\"disabled\"\n        :required=\"required\"\n        :typeable=\"typeable\"\n        :use-utc=\"useUtc\"\n        :minimum-view=\"minimumView\"\n        :maximum-view=\"maximumView\"\n        v-on=\"$listeners\">\n            <slot name=\"beforeCalendarHeader\" slot=\"beforeCalendarHeader\" />\n            <slot name=\"afterDateInput\" slot=\"afterDateInput\" />\n    </VueDatepicker>\n</template>\n\n<script>\nimport VueDatepicker from 'vuejs-datepicker'\n\n// Validator function that checks the date props.\nconst _datePropValidator = (v) => {\n    return v === null\n            || v instanceof Date\n            || typeof v === 'string'\n            || typeof v === 'number'\n}\n\nexport default {\n    name: 'd-datepicker',\n    components: { VueDatepicker },\n    props: {\n        /**\n         * The datepicker's value.\n         */\n        value: {\n            validator: _datePropValidator\n        },\n        /**\n         * The name.\n         */\n        name: {\n            type: String,\n            default: null\n        },\n        /**\n         * The component's ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The date format.\n         */\n        format: {\n            type: [String, Function],\n            default: 'dd MMM yyyy'\n        },\n        /**\n         * The language.\n         */\n        language: Object,\n        /**\n         * If set, the datepicker will open on this date.\n         */\n        openDate: {\n            validator: _datePropValidator\n        },\n        /**\n         * Function used to render custom content inside the day cell.\n         */\n        dayCellContent: Function,\n        /**\n         * Whether to show the full month name, or not.\n         */\n        fullMonthName: Boolean,\n        /**\n         * Configure disabled dates.\n         */\n        disabledDates: Object,\n        /**\n         * Highlight dates.\n         */\n        highlighted: Object,\n        /**\n         * The placeholder.\n         */\n        placeholder: String,\n        /**\n         * Show the datepicker always open.\n         */\n        inline: Boolean,\n        /**\n         * The CSS class applied to the calendar element.\n         */\n        calendarClass: {\n            type: [String, Object, Array],\n            default: ''\n        },\n        /**\n         * The CSS Class applied to the input element.\n         */\n        inputClass: {\n            type: [String, Object, Array],\n            default: 'form-control'\n        },\n        /**\n         * The CSS class applied to the wrapper element.\n         */\n        wrapperClass: [String, Object, Array],\n        /**\n         * Whether Monday is the first day, or not.\n         */\n        mondayFirst: Boolean,\n        /**\n         * Display a button for clearing the dates.\n         */\n        clearButton: Boolean,\n        /**\n         * Use an icon for the clear button.\n         */\n        clearButtonIcon: String,\n        /**\n         * Dislay a calendar button.\n         */\n        calendarButton: Boolean,\n        /**\n         * The calendar button's icon.\n         */\n        calendarButtonIcon: String,\n        /**\n         * The calendar button's icon content.\n         */\n        calendarButtonIconContent: String,\n        /**\n         * If set, the datepicker is opened on that specific view.\n         */\n        initialView: String,\n        /**\n         * The disabled state.\n         */\n        disabled: Boolean,\n        /**\n         * The required state.\n         */\n        required: Boolean,\n        /**\n         * Whether to allow users to type the date, or not.\n         */\n        typeable: Boolean,\n        /**\n         * Use UTC for time calculations.\n         */\n        useUtc: Boolean,\n        /**\n         * If set, the lower-level views will not be shown.\n         */\n        minimumView: {\n            type: String,\n            default: 'day'\n        },\n        /**\n         * If set, the higher-level views will not be shown.\n         */\n        maximumView: {\n            type: String,\n            default: 'year'\n        },\n        /**\n         * Whether the datepicker should be small, or not.\n         */\n        small: {\n            type: Boolean,\n            default: false\n        }\n    },\n    computed: {\n        computedCalendarClass() {\n            let _calendarClass = this.small ? 'vdp-datepicker__small' : ''\n\n            return _calendarClass += this.calendarClass\n        }\n    }\n}\n</script>\n\n<style lang=\"scss\">\n    $white: #fff;\n    $black: #000;\n\n    $color-silver-sand: #c3c7cc;\n    $color-primary: #007bff;\n    $color-shuttle-gray: #5a6169;\n    $color-porcelain: #eceeef;\n\n    $border-color: transparent;\n    $border-radius-default: .375rem;\n    $transition-default: all 250ms cubic-bezier(.27,.01,.38,1.06);\n    $font-system: -apple-system, BlinkMacSystemFont,  \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n\n    $datepicker-color: $color-shuttle-gray;\n    $datepicker-min-width: 10rem;\n    $datepicker-background-color: $white;\n    $datepicker-border-radius: $border-radius-default;\n    $datepicker-font-size: 1rem;\n    $datepicker-padding-x: 22px;\n    $datepicker-padding-y: 20px;\n    $datepicker-font-weight: 300;\n    $datepicker-border: 1px solid rgba($black,.05);\n    $datepicker-drop-shadows: 0 0.5rem 4rem rgba($black,.11),\n                            0 10px 20px rgba($black,.05),\n                            0 2px 3px rgba($black,.06);\n\n    $datepicker-cell-width: 36px;\n    $datepicker-cell-height: 36px;\n    $datepicker-cell-hover-color: $color-porcelain;\n    $datepicker-cell-line-height: 2;\n    $datepicker-cell-font-size: 1rem;\n\n    $datepicker-small-padding-y: .625rem;\n    $datepicker-small-padding-x: .625rem;\n    $datepicker-small-font-size: .75rem;\n    $datepicker-small-max-width: 235px;\n\n    $datepicker-small-day-font-size: 12px;\n    $datepicker-small-day-font-weight: 500;\n    $datepicker-small-day-width: 1.875rem;\n    $datepicker-small-day-height: 1.875rem;\n    $datepicker-small-day-line-height: 2.25;\n\n    $datepicker-small-day-header-font-size: 100%;\n\n    div.vdp-datepicker {\n        &__calendar {\n            color: $datepicker-color;\n            padding: $datepicker-padding-y $datepicker-padding-x;\n            min-width: $datepicker-min-width;\n            font-size: $datepicker-font-size;\n            font-weight: $datepicker-font-weight;\n            font-family: $font-system;\n            background-color: $datepicker-background-color;\n            border: $datepicker-border;\n            border-radius: $datepicker-border-radius;\n            box-shadow: $datepicker-drop-shadows;\n            border: 1px solid rgba($black,.15) !important;\n\n            // Header\n            header {\n                display: flex;\n                padding-bottom: 10px;\n\n                span {\n                    transition: $transition-default;\n                    border-radius: $border-radius-default;\n                    font-weight: 500;\n\n                    &.next:after {\n                        border-left-color: $color-silver-sand;\n                    }\n\n                    &.prev:after {\n                        border-right-color: $color-silver-sand;\n                    }\n                }\n            }\n\n            // Header elements and specific calendar cells.\n            header span,\n            .cell.day:not(.disabled):not(.blank), .cell.month, .cell.year {\n                &:hover {\n                    background-color: $datepicker-cell-hover-color;\n                    border-color: $border-color !important;\n                }\n            }\n\n            // Cells\n            .cell {\n                line-height: $datepicker-cell-line-height;\n                font-size: $datepicker-cell-font-size;\n                border-radius: $border-radius-default;\n                transition: $transition-default;\n                border-color: $border-color;\n                height: auto;\n\n                // Day headers\n                &.day-header {\n                    font-weight: 500;\n                }\n\n                // Days\n                &.day {\n                    width: $datepicker-cell-width;\n                    height: $datepicker-cell-height;\n                    border-radius: 50%;\n                }\n\n                // Months\n                &.month,\n                &.year {\n                    height: $datepicker-cell-height;\n                    font-size: 12px;\n                    line-height: 33px;\n                }\n\n                // Selected\n                &.selected,\n                &.highlighted.selected {\n                    background: $color-primary !important;\n                    color: $white;\n                    &:hover {\n                        background: darken($color-primary, 5) !important;\n                        border-color: $border-color !important;\n                    }\n                }\n\n                &.highlighted {\n                    background: $color-primary;\n                    color: $white;\n\n                    &:hover {\n                        background: darken($color-primary, 5) !important;\n                        border-color: $border-color !important;\n                    }\n\n                    &:not(.highlight-start):not(.highlight-end) {\n                        border-radius: 0;\n                    }\n\n                    &.highlight-start {\n                        border-top-right-radius: 0;\n                        border-bottom-right-radius: 0;\n                    }\n\n                    &.highlight-end {\n                        border-top-left-radius: 0;\n                        border-bottom-left-radius: 0;\n                    }\n                }\n            }\n        }\n\n        // Small Datepicker modifier.\n        &__small {\n            padding: $datepicker-small-padding-y $datepicker-small-padding-x;\n            font-size: $datepicker-small-font-size;\n            max-width: $datepicker-small-max-width;\n\n            .cell {\n                &.day {\n                    width: $datepicker-small-day-width;\n                    height: $datepicker-small-day-height;\n                    line-height: $datepicker-small-day-line-height;\n                }\n\n                &.day,\n                &.month,\n                &.year {\n                    font-size: $datepicker-small-day-font-size;\n                    font-weight: $datepicker-small-day-font-weight;\n                }\n\n                &.day-header {\n                    font-size: $datepicker-small-day-header-font-size;\n                }\n            }\n        }\n    }\n</style>\n\n\n","div.vdp-datepicker__calendar {\n  color: #5a6169;\n  padding: 20px 22px;\n  min-width: 10rem;\n  font-size: 1rem;\n  font-weight: 300;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.05);\n  border-radius: 0.375rem;\n  box-shadow: 0 0.5rem 4rem rgba(0, 0, 0, 0.11), 0 10px 20px rgba(0, 0, 0, 0.05), 0 2px 3px rgba(0, 0, 0, 0.06);\n  border: 1px solid rgba(0, 0, 0, 0.15) !important;\n}\ndiv.vdp-datepicker__calendar header {\n  display: flex;\n  padding-bottom: 10px;\n}\ndiv.vdp-datepicker__calendar header span {\n  transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n  border-radius: 0.375rem;\n  font-weight: 500;\n}\ndiv.vdp-datepicker__calendar header span.next:after {\n  border-left-color: #c3c7cc;\n}\ndiv.vdp-datepicker__calendar header span.prev:after {\n  border-right-color: #c3c7cc;\n}\ndiv.vdp-datepicker__calendar header span:hover,\ndiv.vdp-datepicker__calendar .cell.day:not(.disabled):not(.blank):hover, div.vdp-datepicker__calendar .cell.month:hover, div.vdp-datepicker__calendar .cell.year:hover {\n  background-color: #eceeef;\n  border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell {\n  line-height: 2;\n  font-size: 1rem;\n  border-radius: 0.375rem;\n  transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);\n  border-color: transparent;\n  height: auto;\n}\ndiv.vdp-datepicker__calendar .cell.day-header {\n  font-weight: 500;\n}\ndiv.vdp-datepicker__calendar .cell.day {\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n}\ndiv.vdp-datepicker__calendar .cell.month, div.vdp-datepicker__calendar .cell.year {\n  height: 36px;\n  font-size: 12px;\n  line-height: 33px;\n}\ndiv.vdp-datepicker__calendar .cell.selected, div.vdp-datepicker__calendar .cell.highlighted.selected {\n  background: #007bff !important;\n  color: #fff;\n}\ndiv.vdp-datepicker__calendar .cell.selected:hover, div.vdp-datepicker__calendar .cell.highlighted.selected:hover {\n  background: #006fe6 !important;\n  border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted {\n  background: #007bff;\n  color: #fff;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted:hover {\n  background: #006fe6 !important;\n  border-color: transparent !important;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted:not(.highlight-start):not(.highlight-end) {\n  border-radius: 0;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted.highlight-start {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\ndiv.vdp-datepicker__calendar .cell.highlighted.highlight-end {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\ndiv.vdp-datepicker__small {\n  padding: 0.625rem 0.625rem;\n  font-size: 0.75rem;\n  max-width: 235px;\n}\ndiv.vdp-datepicker__small .cell.day {\n  width: 1.875rem;\n  height: 1.875rem;\n  line-height: 2.25;\n}\ndiv.vdp-datepicker__small .cell.day, div.vdp-datepicker__small .cell.month, div.vdp-datepicker__small .cell.year {\n  font-size: 12px;\n  font-weight: 500;\n}\ndiv.vdp-datepicker__small .cell.day-header {\n  font-size: 100%;\n}\n\n/*# sourceMappingURL=Datepicker.vue.map */"]}, media: undefined });
 
       };
       /* scoped */
@@ -3553,21 +3633,25 @@
       var __vue_is_functional_template__$k = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dDatepicker = normalizeComponent_1(
+      var __vue_component__$k = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
         __vue_inject_styles__$k,
         __vue_script__$k,
         __vue_scope_id__$k,
         __vue_is_functional_template__$k,
         __vue_module_identifier__$k,
+        false,
         browser,
+        undefined,
         undefined
       );
 
     var components$9 = {
-        dDatepicker: dDatepicker
+        dDatepicker: __vue_component__$k
     };
 
     var VuePlugin$9 = {
@@ -3580,7 +3664,7 @@
 
     /**!
      * @fileOverview Kickass library to create and place poppers near their reference elements.
-     * @version 1.16.0
+     * @version 1.16.1
      * @license
      * Copyright (c) 2016 Federico Zivolo and contributors
      *
@@ -3926,7 +4010,7 @@
       var sideA = axis === 'x' ? 'Left' : 'Top';
       var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-      return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
+      return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
     }
 
     function getSize(axis, body, html, computedStyle) {
@@ -4083,8 +4167,8 @@
       var scrollParent = getScrollParent(children);
 
       var styles = getStyleComputedProperty(parent);
-      var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
-      var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
+      var borderTopWidth = parseFloat(styles.borderTopWidth);
+      var borderLeftWidth = parseFloat(styles.borderLeftWidth);
 
       // In cases where the parent is fixed, we must ignore negative scroll in offset calc
       if (fixedPosition && isHTML) {
@@ -4105,8 +4189,8 @@
       // differently when margins are applied to it. The margins are included in
       // the box of the documentElement, in the other cases not.
       if (!isIE10 && isHTML) {
-        var marginTop = parseFloat(styles.marginTop, 10);
-        var marginLeft = parseFloat(styles.marginLeft, 10);
+        var marginTop = parseFloat(styles.marginTop);
+        var marginLeft = parseFloat(styles.marginLeft);
 
         offsets.top -= borderTopWidth - marginTop;
         offsets.bottom -= borderTopWidth - marginTop;
@@ -5045,8 +5129,8 @@
       // Compute the sideValue using the updated popper offsets
       // take popper margin in account because we don't have this info available
       var css = getStyleComputedProperty(data.instance.popper);
-      var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
-      var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+      var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
+      var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
       var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
       // prevent arrowElement from being placed not contiguously to its popper
@@ -6754,27 +6838,31 @@
       /* style */
       var __vue_inject_styles__$l = function (inject) {
         if (!inject) { return }
-        inject("data-v-a869565c_0", { source: "\n.nav-link[data-v-a869565c]:hover {\n    cursor: pointer;\n}\n.material-icons[data-v-a869565c] {\n    color: #fff;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/dropdown/Dropdown.vue"],"names":[],"mappings":";AA2cA;IACA,eAAA;AACA;AAEA;IACA,WAAA;AACA","file":"Dropdown.vue","sourcesContent":["<template>\n    <component :is=\"computedTag\" :id=\"computedID\"\n        v-on-clickaway=\"away\"\n        :class=\"[\n            'dropdown',\n            'd-dropdown',\n            !isNav ? 'btn-group' : '',\n            isNav ? 'nav-item' : '',\n            dropup ? 'dropup' : '',\n            visible ? 'show' : '',\n            (boundary !== 'scrollParent' || !boundary) ? 'position-static' : ''\n        ]\">\n\n        <!-- Dropdown Split -->\n        <d-button v-if=\"split && !isNav\"\n            ref=\"button\"\n            :disabled=\"disabled\"\n            :theme=\"theme\"\n            :size=\"size\"\n            :id=\"computedSplitID\"\n            @click=\"click\">\n            <slot name=\"button-content\">\n                <i\n                    v-if=\"icon !== ''\"\n                    class=\"material-icons\">\n                    {{ icon }}\n                </i>\n                {{ text }}\n            </slot>\n        </d-button>\n\n        <!-- Dropdown Toggle -->\n        <component :is=\"computedToggleTag\" ref=\"toggle\"\n            :id=\"computedToggleID\"\n            :class=\"[\n                isNav ? 'nav-link' : '',\n                !noCaret || split ? 'dropdown-toggle' : '',\n                split && !isNav ? 'dropdown-toggle-split' : '',\n                toggleClass\n            ]\"\n            :theme=\"theme\"\n            :size=\"size\"\n            :disabled=\"disabled\"\n            :aria-expanded=\"visible ? 'true' : 'false'\"\n            aria-haspopup=\"true\"\n            @click=\"toggle\"\n            @keydown=\"toggle\">\n            <span v-if=\"split\" class=\"sr-only\">{{ toggleText }}</span>\n            <slot v-else name=\"button-content\">\n                <i\n                    v-if=\"icon !== ''\"\n                    class=\"material-icons\">\n                    {{ icon }}\n                </i>\n                {{ text }}\n            </slot>\n        </component>\n\n        <!-- Dropdown Menu -->\n        <div ref=\"menu\"\n            role=\"menu\"\n            :class=\"[\n                'dropdown-menu',\n                right ? 'dropdown-menu-right' : '',\n                visible ? 'show' : '',\n                menuClass\n            ]\"\n            :id=\"computedMenuID\"\n            :aria-labeledby=\"computedMenuID\"\n            @mouseover=\"onMouseOver\">\n            <slot />\n        </div>\n    </component>\n</template>\n\n<script>\nimport Popper from 'popper.js'\nimport { guid, closest } from '../../utils'\nimport { THEMECOLORS, DROPDOWN_EVENTS, KEYCODES, LINK_EVENTS } from '../../utils/constants'\nimport { CancelableEvent } from '../../utils/events'\nimport { mixin as clickAwayMixin } from 'vue-clickaway';\nimport rootListenerMixin from '../../mixins/root-listener.mixin'\n\nexport default {\n    name: 'd-dropdown',\n    mixins: [\n        rootListenerMixin,\n        clickAwayMixin\n    ],\n    data() {\n        return {\n            visible: false,\n            isNavbar: null,\n            visibleChangePrevented: false\n        }\n    },\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The dropdown menu ID.\n         */\n        menuId: {\n            type: String,\n            default: null\n        },\n        /**\n         * The toggle ID.\n         */\n        toggleId: {\n            type: String,\n            default: null\n        },\n        /**\n         * The dropdown menu class(es).\n         */\n        menuClass: {\n            type: [String, Array],\n            default: null\n        },\n        /**\n         * The dropdown toggle class(es).\n         */\n        toggleClass: {\n            type: [String, Array],\n            default: null\n        },\n        /**\n         * Align the menu to the right.\n         */\n        right: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether to display the caret, or not.\n         */\n        noCaret: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether to split the dropdown, or not.\n         */\n        split: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The color theme.\n         */\n        theme: {\n            type: String,\n            default: 'primary',\n            validator: v => THEMECOLORS.includes(v)\n        },\n        /**\n         * The dropdown toggle's size.\n         */\n        size: {\n            type: String,\n            default: null\n        },\n        /**\n         * The dropdown's disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The dropdown toggle's text.\n         */\n        toggleText: {\n            type: String,\n            default: 'Toggle Dropdown'\n        },\n        /**\n         * The button label's text.\n         */\n        text: {\n            type: String,\n            default: ''\n        },\n        /**\n         * Icon used in the dropdown\n         */\n        icon: {\n            type: String,\n            default: ''\n        },\n        /**\n         * The dropdown's boundary.\n         */\n        boundary: {\n            type: String,\n            default: 'scrollParent',\n            validator: v => ['scrollParent', 'window', 'viewport'].includes(v)\n        },\n        /**\n         * The offset value.\n         */\n        offset: {\n            type: [Number, String],\n            default: null\n        },\n        /**\n         * Display on top.\n         */\n        dropup: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The Popper options.\n         */\n        popperOptions: {\n            type: Object,\n            default() {\n                return {}\n            }\n        },\n        /**\n         * Disable autoflipping.\n         */\n        noFlip: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether the dropdown is displayed inside a nav, or not.\n         */\n        isNav: {\n            type: Boolean,\n            default: false\n        }\n    },\n    watch: {\n        visible(newVal, oldVal) {\n            if (this.visibleChangePrevented) {\n                this.visibleChangePrevented = false\n                return\n            }\n\n            if (newVal === oldVal) {\n                return\n            }\n\n            const eventName = newVal ? 'show' : 'hide'\n            let _visibleChangeEvent = new CancelableEvent(eventName, {\n                cancelable: true,\n                vueTarget: this,\n                target: this.$refs.menu,\n                relatedTarget: null\n            })\n\n            this.$emit(_visibleChangeEvent.type, _visibleChangeEvent)\n            this.emitOnRoot(DROPDOWN_EVENTS[_visibleChangeEvent.type.toUpperCase()])\n\n            if (_visibleChangeEvent.defaultPrevented) {\n                this.visibleChangePrevented = true\n                this.visible = oldVal\n                return\n            }\n\n            if (eventName === 'show') {\n                this.showMenu()\n                return\n            }\n\n            this.hideMenu()\n        },\n        disabled(newVal, oldVal) {\n            if (newVal !== oldVal && newVal && this.visible) {\n                this.visible = false\n            }\n        }\n    },\n    computed: {\n        computedTag() {\n            return this.isNav ? 'li' : 'div'\n        },\n        computedToggleTag() {\n            return this.isNav ? 'a' : 'd-button'\n        },\n        computedID() {\n            return this.id || `d-dropdown-${guid()}`\n        },\n        computedMenuID() {\n            return this.menuId || `d-dropdown-menu-${guid()}`\n        },\n        computedToggleID() {\n            return this.toggleId || `d-dropdown-toggle-${guid()}`\n        },\n        computedSplitID() {\n            return this.splitId || `d-dropdown-split-${guid()}`\n        },\n        toggler() {\n            return this.$refs.toggle.$el || this.$refs.toggle\n        }\n    },\n    methods: {\n        onMouseOver(event) {\n            const item = event.target\n            if (\n                item.classList.contains('dropdown-item')\n                && !item.disabled\n                && !item.classList.contains('disabled')\n                && item.focus\n            ) {\n                item.focus()\n            }\n        },\n        toggle(event) {\n            event = event || {}\n\n            // Enter, Space or Down\n            const KEY_ESD = event.keyCode === KEYCODES.ENTER\n                            || event.keyCode === KEYCODES.SPACE\n                            || event.keyCode === KEYCODES.DOWN\n\n            if (event.type !== 'click' && !(event.type === 'keydown' && KEY_ESD)) {\n                return\n            }\n\n            if (this.disabled) {\n                this.visible = false\n                return\n            }\n\n            this.$emit('toggle', event)\n\n            if (event.defaultPrevented) {\n                return\n            }\n\n            event.preventDefault()\n            event.stopPropagation()\n\n            this.visible = !this.visible\n        },\n        click(event) {\n            if (this.disabled) {\n                this.visible = false\n                return\n            }\n            this.$emit('click', event)\n        },\n        createPopper(element) {\n            this.removePopper()\n\n            // Define placement\n            let placement = 'bottom-start'\n\n            if (this.dropup && this.right) {\n                placement = 'top-end'\n            } else if (this.dropup) {\n                placement = 'top-start'\n            } else if (this.right) {\n                placement = 'bottom-end'\n            }\n\n            // Build Popper config\n            const popperConfig = {\n                placement,\n                modifiers: {\n                    offset: {\n                        offset: this.offset || 0\n                    },\n                    flip: {\n                        enabled: !this.noFlip\n                    },\n                    computeStyle: {\n                        enabled: true\n                    }\n                }\n            }\n\n            // Define Popper boundaries\n            if (this.boundary) {\n                popperConfig.modifiers.preventOverflow = {\n                    boundariesElement: this.boundary\n                }\n            }\n\n            // Create Popper instance\n            this._popperInstance = new Popper(\n                element,\n                this.$refs.menu,\n                {\n                    ...popperConfig,\n                    ...this.popperOptions\n                }\n            )\n        },\n        removePopper() {\n            if (this._popper) {\n                this._popper.destroy()\n            }\n            this._popperInstance = null\n        },\n        showMenu() {\n            if (this.disabled) {\n                return\n            }\n\n            this.emitOnRoot(DROPDOWN_EVENTS.SHOWN, this)\n\n            if (this.inNavbar === null && this.isNav) {\n                this.inNavbar = Boolean(closest('.navbar', this.$el))\n            }\n\n            if (!this.inNavbar) {\n                let _element = ((this.dropup && this.right) || this.split) ? this.$el : this.$refs.toggle\n                _element = _element.$el || _element\n                this.createPopper(_element)\n            }\n\n            this.$emit('shown')\n            this.$nextTick(this.focusFirstItem)\n        },\n        hideMenu() {\n            this.emitOnRoot(DROPDOWN_EVENTS.HIDDEN, this)\n            this.$emit('hidden')\n            this.removePopper()\n        },\n        away() {\n            this.visible = false\n        }\n    },\n    created() {\n        this._popperInstance = null\n    },\n    mounted() {\n        this.listenOnRoot(DROPDOWN_EVENTS.SHOWN, function(vm) {\n            if (vm !== this) {\n                this.visible = false\n            }\n        })\n\n        this.listenOnRoot(LINK_EVENTS.CLICKED, this.away)\n    },\n    deactivated() {\n        this.visible = false\n        this.removePopper()\n    },\n    beforeDestroy() {\n        this.visible = false\n        this.removePopper()\n    }\n}\n</script>\n\n<style scoped>\n.nav-link:hover {\n    cursor: pointer;\n}\n\n.material-icons {\n    color: #fff;\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-27b63756_0", { source: "\n.nav-link[data-v-27b63756]:hover {\n    cursor: pointer;\n}\n.material-icons[data-v-27b63756] {\n    color: #fff;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/dropdown/Dropdown.vue"],"names":[],"mappings":";AA2cA;IACA,eAAA;AACA;AAEA;IACA,WAAA;AACA","file":"Dropdown.vue","sourcesContent":["<template>\n    <component :is=\"computedTag\" :id=\"computedID\"\n        v-on-clickaway=\"away\"\n        :class=\"[\n            'dropdown',\n            'd-dropdown',\n            !isNav ? 'btn-group' : '',\n            isNav ? 'nav-item' : '',\n            dropup ? 'dropup' : '',\n            visible ? 'show' : '',\n            (boundary !== 'scrollParent' || !boundary) ? 'position-static' : ''\n        ]\">\n\n        <!-- Dropdown Split -->\n        <d-button v-if=\"split && !isNav\"\n            ref=\"button\"\n            :disabled=\"disabled\"\n            :theme=\"theme\"\n            :size=\"size\"\n            :id=\"computedSplitID\"\n            @click=\"click\">\n            <slot name=\"button-content\">\n                <i\n                    v-if=\"icon !== ''\"\n                    class=\"material-icons\">\n                    {{ icon }}\n                </i>\n                {{ text }}\n            </slot>\n        </d-button>\n\n        <!-- Dropdown Toggle -->\n        <component :is=\"computedToggleTag\" ref=\"toggle\"\n            :id=\"computedToggleID\"\n            :class=\"[\n                isNav ? 'nav-link' : '',\n                !noCaret || split ? 'dropdown-toggle' : '',\n                split && !isNav ? 'dropdown-toggle-split' : '',\n                toggleClass\n            ]\"\n            :theme=\"theme\"\n            :size=\"size\"\n            :disabled=\"disabled\"\n            :aria-expanded=\"visible ? 'true' : 'false'\"\n            aria-haspopup=\"true\"\n            @click=\"toggle\"\n            @keydown=\"toggle\">\n            <span v-if=\"split\" class=\"sr-only\">{{ toggleText }}</span>\n            <slot v-else name=\"button-content\">\n                <i\n                    v-if=\"icon !== ''\"\n                    class=\"material-icons\">\n                    {{ icon }}\n                </i>\n                {{ text }}\n            </slot>\n        </component>\n\n        <!-- Dropdown Menu -->\n        <div ref=\"menu\"\n            role=\"menu\"\n            :class=\"[\n                'dropdown-menu',\n                right ? 'dropdown-menu-right' : '',\n                visible ? 'show' : '',\n                menuClass\n            ]\"\n            :id=\"computedMenuID\"\n            :aria-labeledby=\"computedMenuID\"\n            @mouseover=\"onMouseOver\">\n            <slot />\n        </div>\n    </component>\n</template>\n\n<script>\nimport Popper from 'popper.js'\nimport { guid, closest } from '../../utils'\nimport { THEMECOLORS, DROPDOWN_EVENTS, KEYCODES, LINK_EVENTS } from '../../utils/constants'\nimport { CancelableEvent } from '../../utils/events'\nimport { mixin as clickAwayMixin } from 'vue-clickaway';\nimport rootListenerMixin from '../../mixins/root-listener.mixin'\n\nexport default {\n    name: 'd-dropdown',\n    mixins: [\n        rootListenerMixin,\n        clickAwayMixin\n    ],\n    data() {\n        return {\n            visible: false,\n            isNavbar: null,\n            visibleChangePrevented: false\n        }\n    },\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The dropdown menu ID.\n         */\n        menuId: {\n            type: String,\n            default: null\n        },\n        /**\n         * The toggle ID.\n         */\n        toggleId: {\n            type: String,\n            default: null\n        },\n        /**\n         * The dropdown menu class(es).\n         */\n        menuClass: {\n            type: [String, Array],\n            default: null\n        },\n        /**\n         * The dropdown toggle class(es).\n         */\n        toggleClass: {\n            type: [String, Array],\n            default: null\n        },\n        /**\n         * Align the menu to the right.\n         */\n        right: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether to display the caret, or not.\n         */\n        noCaret: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether to split the dropdown, or not.\n         */\n        split: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The color theme.\n         */\n        theme: {\n            type: String,\n            default: 'primary',\n            validator: v => THEMECOLORS.includes(v)\n        },\n        /**\n         * The dropdown toggle's size.\n         */\n        size: {\n            type: String,\n            default: null\n        },\n        /**\n         * The dropdown's disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The dropdown toggle's text.\n         */\n        toggleText: {\n            type: String,\n            default: 'Toggle Dropdown'\n        },\n        /**\n         * The button label's text.\n         */\n        text: {\n            type: String,\n            default: ''\n        },\n        /**\n         * Icon used in the dropdown\n         */\n        icon: {\n            type: String,\n            default: ''\n        },\n        /**\n         * The dropdown's boundary.\n         */\n        boundary: {\n            type: String,\n            default: 'scrollParent',\n            validator: v => ['scrollParent', 'window', 'viewport'].includes(v)\n        },\n        /**\n         * The offset value.\n         */\n        offset: {\n            type: [Number, String],\n            default: null\n        },\n        /**\n         * Display on top.\n         */\n        dropup: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The Popper options.\n         */\n        popperOptions: {\n            type: Object,\n            default() {\n                return {}\n            }\n        },\n        /**\n         * Disable autoflipping.\n         */\n        noFlip: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether the dropdown is displayed inside a nav, or not.\n         */\n        isNav: {\n            type: Boolean,\n            default: false\n        }\n    },\n    watch: {\n        visible(newVal, oldVal) {\n            if (this.visibleChangePrevented) {\n                this.visibleChangePrevented = false\n                return\n            }\n\n            if (newVal === oldVal) {\n                return\n            }\n\n            const eventName = newVal ? 'show' : 'hide'\n            let _visibleChangeEvent = new CancelableEvent(eventName, {\n                cancelable: true,\n                vueTarget: this,\n                target: this.$refs.menu,\n                relatedTarget: null\n            })\n\n            this.$emit(_visibleChangeEvent.type, _visibleChangeEvent)\n            this.emitOnRoot(DROPDOWN_EVENTS[_visibleChangeEvent.type.toUpperCase()])\n\n            if (_visibleChangeEvent.defaultPrevented) {\n                this.visibleChangePrevented = true\n                this.visible = oldVal\n                return\n            }\n\n            if (eventName === 'show') {\n                this.showMenu()\n                return\n            }\n\n            this.hideMenu()\n        },\n        disabled(newVal, oldVal) {\n            if (newVal !== oldVal && newVal && this.visible) {\n                this.visible = false\n            }\n        }\n    },\n    computed: {\n        computedTag() {\n            return this.isNav ? 'li' : 'div'\n        },\n        computedToggleTag() {\n            return this.isNav ? 'a' : 'd-button'\n        },\n        computedID() {\n            return this.id || `d-dropdown-${guid()}`\n        },\n        computedMenuID() {\n            return this.menuId || `d-dropdown-menu-${guid()}`\n        },\n        computedToggleID() {\n            return this.toggleId || `d-dropdown-toggle-${guid()}`\n        },\n        computedSplitID() {\n            return this.splitId || `d-dropdown-split-${guid()}`\n        },\n        toggler() {\n            return this.$refs.toggle.$el || this.$refs.toggle\n        }\n    },\n    methods: {\n        onMouseOver(event) {\n            const item = event.target\n            if (\n                item.classList.contains('dropdown-item')\n                && !item.disabled\n                && !item.classList.contains('disabled')\n                && item.focus\n            ) {\n                item.focus()\n            }\n        },\n        toggle(event) {\n            event = event || {}\n\n            // Enter, Space or Down\n            const KEY_ESD = event.keyCode === KEYCODES.ENTER\n                            || event.keyCode === KEYCODES.SPACE\n                            || event.keyCode === KEYCODES.DOWN\n\n            if (event.type !== 'click' && !(event.type === 'keydown' && KEY_ESD)) {\n                return\n            }\n\n            if (this.disabled) {\n                this.visible = false\n                return\n            }\n\n            this.$emit('toggle', event)\n\n            if (event.defaultPrevented) {\n                return\n            }\n\n            event.preventDefault()\n            event.stopPropagation()\n\n            this.visible = !this.visible\n        },\n        click(event) {\n            if (this.disabled) {\n                this.visible = false\n                return\n            }\n            this.$emit('click', event)\n        },\n        createPopper(element) {\n            this.removePopper()\n\n            // Define placement\n            let placement = 'bottom-start'\n\n            if (this.dropup && this.right) {\n                placement = 'top-end'\n            } else if (this.dropup) {\n                placement = 'top-start'\n            } else if (this.right) {\n                placement = 'bottom-end'\n            }\n\n            // Build Popper config\n            const popperConfig = {\n                placement,\n                modifiers: {\n                    offset: {\n                        offset: this.offset || 0\n                    },\n                    flip: {\n                        enabled: !this.noFlip\n                    },\n                    computeStyle: {\n                        enabled: true\n                    }\n                }\n            }\n\n            // Define Popper boundaries\n            if (this.boundary) {\n                popperConfig.modifiers.preventOverflow = {\n                    boundariesElement: this.boundary\n                }\n            }\n\n            // Create Popper instance\n            this._popperInstance = new Popper(\n                element,\n                this.$refs.menu,\n                {\n                    ...popperConfig,\n                    ...this.popperOptions\n                }\n            )\n        },\n        removePopper() {\n            if (this._popper) {\n                this._popper.destroy()\n            }\n            this._popperInstance = null\n        },\n        showMenu() {\n            if (this.disabled) {\n                return\n            }\n\n            this.emitOnRoot(DROPDOWN_EVENTS.SHOWN, this)\n\n            if (this.inNavbar === null && this.isNav) {\n                this.inNavbar = Boolean(closest('.navbar', this.$el))\n            }\n\n            if (!this.inNavbar) {\n                let _element = ((this.dropup && this.right) || this.split) ? this.$el : this.$refs.toggle\n                _element = _element.$el || _element\n                this.createPopper(_element)\n            }\n\n            this.$emit('shown')\n            this.$nextTick(this.focusFirstItem)\n        },\n        hideMenu() {\n            this.emitOnRoot(DROPDOWN_EVENTS.HIDDEN, this)\n            this.$emit('hidden')\n            this.removePopper()\n        },\n        away() {\n            this.visible = false\n        }\n    },\n    created() {\n        this._popperInstance = null\n    },\n    mounted() {\n        this.listenOnRoot(DROPDOWN_EVENTS.SHOWN, function(vm) {\n            if (vm !== this) {\n                this.visible = false\n            }\n        })\n\n        this.listenOnRoot(LINK_EVENTS.CLICKED, this.away)\n    },\n    deactivated() {\n        this.visible = false\n        this.removePopper()\n    },\n    beforeDestroy() {\n        this.visible = false\n        this.removePopper()\n    }\n}\n</script>\n\n<style scoped>\n.nav-link:hover {\n    cursor: pointer;\n}\n\n.material-icons {\n    color: #fff;\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$l = "data-v-a869565c";
+      var __vue_scope_id__$l = "data-v-27b63756";
       /* module identifier */
       var __vue_module_identifier__$l = undefined;
       /* functional template */
       var __vue_is_functional_template__$l = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dDropdown = normalizeComponent_1(
+      var __vue_component__$l = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
         __vue_inject_styles__$l,
         __vue_script__$l,
         __vue_scope_id__$l,
         __vue_is_functional_template__$l,
         __vue_module_identifier__$l,
+        false,
         browser,
+        undefined,
         undefined
       );
 
@@ -6814,27 +6902,31 @@
       /* style */
       var __vue_inject_styles__$m = function (inject) {
         if (!inject) { return }
-        inject("data-v-b40de8e4_0", { source: "\n.dropdown-item[data-v-b40de8e4]:focus {\n    outline: 0;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/dropdown/DropdownItem.vue"],"names":[],"mappings":";AAqBA;IACA,UAAA;AACA","file":"DropdownItem.vue","sourcesContent":["<template>\n    <d-link class=\"dropdown-item\" role=\"menuitem\" v-bind=\"$props\">\n        <slot />\n    </d-link>\n</template>\n\n<script>\nimport createLinkProps from '../link/create-link-props'\n\n/**\n * This subcomponent is inheriting <a href=\"/docs/components/link\">Link</a> component's props.\n */\nexport default {\n    name: 'd-dropdown-item',\n    props: {\n        ...createLinkProps()\n    }\n}\n</script>\n\n<style scoped>\n.dropdown-item:focus {\n    outline: 0;\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-3dedc48a_0", { source: "\n.dropdown-item[data-v-3dedc48a]:focus {\n    outline: 0;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/dropdown/DropdownItem.vue"],"names":[],"mappings":";AAqBA;IACA,UAAA;AACA","file":"DropdownItem.vue","sourcesContent":["<template>\n    <d-link class=\"dropdown-item\" role=\"menuitem\" v-bind=\"$props\">\n        <slot />\n    </d-link>\n</template>\n\n<script>\nimport createLinkProps from '../link/create-link-props'\n\n/**\n * This subcomponent is inheriting <a href=\"/docs/components/link\">Link</a> component's props.\n */\nexport default {\n    name: 'd-dropdown-item',\n    props: {\n        ...createLinkProps()\n    }\n}\n</script>\n\n<style scoped>\n.dropdown-item:focus {\n    outline: 0;\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$m = "data-v-b40de8e4";
+      var __vue_scope_id__$m = "data-v-3dedc48a";
       /* module identifier */
       var __vue_module_identifier__$m = undefined;
       /* functional template */
       var __vue_is_functional_template__$m = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dDropdownItem = normalizeComponent_1(
+      var __vue_component__$m = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
         __vue_inject_styles__$m,
         __vue_script__$m,
         __vue_scope_id__$m,
         __vue_is_functional_template__$m,
         __vue_module_identifier__$m,
+        false,
         browser,
+        undefined,
         undefined
       );
 
@@ -6897,15 +6989,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dDropdownHeader = normalizeComponent_1(
+      var __vue_component__$n = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
         __vue_inject_styles__$n,
         __vue_script__$n,
         __vue_scope_id__$n,
         __vue_is_functional_template__$n,
         __vue_module_identifier__$n,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -6966,24 +7062,28 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dDropdownDivider = normalizeComponent_1(
+      var __vue_component__$o = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
         __vue_inject_styles__$o,
         __vue_script__$o,
         __vue_scope_id__$o,
         __vue_is_functional_template__$o,
         __vue_module_identifier__$o,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$a = {
-        dDropdown: dDropdown,
-        dDropdownItem: dDropdownItem,
-        dDropdownHeader: dDropdownHeader,
-        dDropdownDivider: dDropdownDivider
+        dDropdown: __vue_component__$l,
+        dDropdownItem: __vue_component__$m,
+        dDropdownHeader: __vue_component__$n,
+        dDropdownDivider: __vue_component__$o
     };
 
     var VuePlugin$a = {
@@ -7070,21 +7170,25 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dEmbed = normalizeComponent_1(
+      var __vue_component__$p = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
         __vue_inject_styles__$p,
         __vue_script__$p,
         __vue_scope_id__$p,
         __vue_is_functional_template__$p,
         __vue_module_identifier__$p,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$b = {
-        dEmbed: dEmbed,
+        dEmbed: __vue_component__$p,
     };
 
     var VuePlugin$b = {
@@ -7179,15 +7283,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dForm = normalizeComponent_1(
+      var __vue_component__$q = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
         __vue_inject_styles__$q,
         __vue_script__$q,
         __vue_scope_id__$q,
         __vue_is_functional_template__$q,
         __vue_module_identifier__$q,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -7242,15 +7350,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormRow = normalizeComponent_1(
+      var __vue_component__$r = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
         __vue_inject_styles__$r,
         __vue_script__$r,
         __vue_scope_id__$r,
         __vue_is_functional_template__$r,
         __vue_module_identifier__$r,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -7321,15 +7433,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormText = normalizeComponent_1(
+      var __vue_component__$s = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
         __vue_inject_styles__$s,
         __vue_script__$s,
         __vue_scope_id__$s,
         __vue_is_functional_template__$s,
         __vue_module_identifier__$s,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -7406,15 +7522,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormFeedback = normalizeComponent_1(
+      var __vue_component__$t = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$t, staticRenderFns: __vue_staticRenderFns__$t },
         __vue_inject_styles__$t,
         __vue_script__$t,
         __vue_scope_id__$t,
         __vue_is_functional_template__$t,
         __vue_module_identifier__$t,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -7492,15 +7612,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormValidFeedback = normalizeComponent_1(
+      var __vue_component__$u = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$u, staticRenderFns: __vue_staticRenderFns__$u },
         __vue_inject_styles__$u,
         __vue_script__$u,
         __vue_scope_id__$u,
         __vue_is_functional_template__$u,
         __vue_module_identifier__$u,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -7578,28 +7702,32 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormInvalidFeedback = normalizeComponent_1(
+      var __vue_component__$v = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$v, staticRenderFns: __vue_staticRenderFns__$v },
         __vue_inject_styles__$v,
         __vue_script__$v,
         __vue_scope_id__$v,
         __vue_is_functional_template__$v,
         __vue_module_identifier__$v,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$c = {
-        dForm: dForm,
-        dFormRow: dFormRow,
-        dFormText: dFormText,
-        dFormFeedback: dFormFeedback,
-        dFormValidFeedback: dFormValidFeedback,
-        dValidFeedback: dFormValidFeedback,
-        dFormInvalidFeedback: dFormInvalidFeedback,
-        dInvalidFeedback: dFormInvalidFeedback
+        dForm: __vue_component__$q,
+        dFormRow: __vue_component__$r,
+        dFormText: __vue_component__$s,
+        dFormFeedback: __vue_component__$t,
+        dFormValidFeedback: __vue_component__$u,
+        dValidFeedback: __vue_component__$u,
+        dFormInvalidFeedback: __vue_component__$v,
+        dInvalidFeedback: __vue_component__$v
     };
 
     var VuePlugin$c = {
@@ -7883,22 +8011,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormCheckbox = normalizeComponent_1(
+      var __vue_component__$w = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$w, staticRenderFns: __vue_staticRenderFns__$w },
         __vue_inject_styles__$w,
         __vue_script__$w,
         __vue_scope_id__$w,
         __vue_is_functional_template__$w,
         __vue_module_identifier__$w,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$d = {
-        dFormCheckbox: dFormCheckbox,
-        dCheckbox: dFormCheckbox
+        dFormCheckbox: __vue_component__$w,
+        dCheckbox: __vue_component__$w
     };
 
     var VuePlugin$d = {
@@ -8114,22 +8246,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormInput = normalizeComponent_1(
+      var __vue_component__$x = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$x, staticRenderFns: __vue_staticRenderFns__$x },
         __vue_inject_styles__$x,
         __vue_script__$x,
         __vue_scope_id__$x,
         __vue_is_functional_template__$x,
         __vue_module_identifier__$x,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$e = {
-        dFormInput: dFormInput,
-        dInput: dFormInput
+        dFormInput: __vue_component__$x,
+        dInput: __vue_component__$x
     };
 
     var VuePlugin$e = {
@@ -8350,22 +8486,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormRadio = normalizeComponent_1(
+      var __vue_component__$y = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$y, staticRenderFns: __vue_staticRenderFns__$y },
         __vue_inject_styles__$y,
         __vue_script__$y,
         __vue_scope_id__$y,
         __vue_is_functional_template__$y,
         __vue_module_identifier__$y,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$f = {
-        dFormRadio: dFormRadio,
-        dRadio: dFormRadio
+        dFormRadio: __vue_component__$y,
+        dRadio: __vue_component__$y
     };
 
     var VuePlugin$f = {
@@ -8664,33 +8804,37 @@
       /* style */
       var __vue_inject_styles__$z = function (inject) {
         if (!inject) { return }
-        inject("data-v-034fa7f4_0", { source: "\n.custom-select[data-v-034fa7f4] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/form-select/FormSelect.vue"],"names":[],"mappings":";AAgPA;IACA,wBAAA;IACA,qBAAA;IACA,gBAAA;AACA","file":"FormSelect.vue","sourcesContent":["<template>\n    <select ref=\"input\"\n        :class=\"[\n            'form-control',\n            stateClass,\n            size ? `form-control-${size}` : null,\n            !multiple && selectSize > 1 ? null : 'custom-select'\n        ]\"\n        v-model=\"localValue\"\n        :id=\"computedID\"\n        :name=\"name\"\n        :multiple=\"multiple || null\"\n        :size=\"(multiple || selectSize > 1) ? selectSize : null\"\n        :disabled=\"disabled\"\n        :required=\"required\"\n        :aria-required=\"required ? true : null\"\n        :aria-invalid=\"computedAriaInvalid\"\n        @change=\"handleChange\" >\n        <option v-for=\"(option, idx) in formOptions\"\n            :key=\"`dr-opt-${idx}`\"\n            :value=\"option.value\"\n            :disabled=\"Boolean(option.disabled)\">\n                {{ option.text }}\n        </option>\n        <slot />\n    </select>\n</template>\n\n<script>\nimport { guid } from '../../utils'\n\nexport default {\n    name: 'd-form-select',\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The element name.\n         */\n        name: {\n            type: String\n        },\n        /**\n         * The select options.\n         */\n        options: {\n            type: [Array, Object],\n            default() {\n                return []\n            }\n        },\n        /**\n         * The select value.\n         */\n        value: {},\n        /**\n         * Whether it should allow multiple selections, or not.\n         */\n        multiple: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * How many options should be visible.\n         */\n        selectSize: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * Controls the `aria-invalid` attribute.\n         */\n        ariaInvalid: {\n            type: [Boolean, String],\n            default: false\n        },\n        /**\n         * The value field.\n         */\n        valueField: {\n            type: String,\n            default: 'value'\n        },\n        /**\n         * The disabled field.\n         */\n        disabledField: {\n            type: String,\n            default: 'disabled'\n        },\n        /**\n         * The text field.\n         */\n        textField: {\n            type: String,\n            default: 'text'\n        },\n        /**\n         * The disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The required state.\n         */\n        required: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The validity state (invalid, valid, true, false).\n         */\n        state: {\n            type: [Boolean, String],\n            default: null,\n            validator: v => ['valid', 'invalid', true, false, null].includes(v)\n        },\n        /**\n         * The form control size (sm, lg).\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: v => ['sm', 'lg', null].includes(v)\n        }\n    },\n    data() {\n        return {\n            localValue: this.value\n        }\n    },\n    watch: {\n        value(newVal) {\n            this.localValue = newVal\n        },\n\n        localValue() {\n            this.$emit('input', this.localValue)\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `dr-select-${guid()}`\n        },\n\n        computedState() {\n            if (this.state === true || this.state === 'valid') {\n                return true\n            }\n\n            if (this.state === false || this.state === 'invalid') {\n                return false\n            }\n\n            return null\n        },\n\n        stateClass() {\n            if (this.computedState === true) {\n                return 'is-valid'\n            } else if (this.computedState === false) {\n                return 'is-invalid'\n            }\n\n            return null\n        },\n\n        computedAriaInvalid() {\n            if (this.ariaInvalid === true || this.ariaInvalid === 'true') {\n                return 'true';\n            }\n\n            return this.stateClass == 'is-invalid' ? 'true' : null;\n        },\n\n        formOptions() {\n            let options = this.options || {}\n            const valueField = this.valueField || 'value'\n            const textField = this.textField || 'text'\n            const disabledField = this.disabledField || 'disabled'\n\n            // Parse array options\n            if (Array.isArray(options)) {\n                return options.map(option => {\n                    if (typeof option === 'object') {\n                        return {\n                            value: option[valueField],\n                            text: String(option[textField]),\n                            disabled: option[disabledField] || false\n                        }\n                    }\n\n                    return { text: String(option), value: option, disabled: false }\n                })\n\n            // Parse object options\n            } else if (typeof options === 'object') {\n                return Object.keys(options).map(key => {\n                    let option = options[key] || {}\n\n                    if (typeof option === 'object') {\n                        const value = option[valueField]\n                        const text = option[textField]\n\n                        return {\n                            text: typeof text === 'undefined' ? key : String(text),\n                            value: typeof value === 'undefined' ? key : value,\n                            disabled: option[disabledField] || false\n                        }\n                    }\n\n                    return { text: String(option), value: key, disabled: false }\n                })\n            }\n\n            return []\n        }\n    },\n    methods: {\n        handleChange(evt) {\n            const target = evt.target;\n            const selectedVal = Array.from(target.options)\n                                    .filter(opt => opt.selected)\n                                    .map(opt => '_value' in opt ? opt._value : opt.value)\n\n            this.localValue = target.multiple ? selectedVal : selectedVal[0];\n            this.$emit('change', this.localValue);\n        }\n    }\n}\n</script>\n\n<style scoped>\n    .custom-select {\n        -webkit-appearance: none;\n        -moz-appearance: none;\n        appearance: none;\n    }\n</style>\n"]}, media: undefined });
+        inject("data-v-55b297fc_0", { source: "\n.custom-select[data-v-55b297fc] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/form-select/FormSelect.vue"],"names":[],"mappings":";AAgPA;IACA,wBAAA;IACA,qBAAA;IACA,gBAAA;AACA","file":"FormSelect.vue","sourcesContent":["<template>\n    <select ref=\"input\"\n        :class=\"[\n            'form-control',\n            stateClass,\n            size ? `form-control-${size}` : null,\n            !multiple && selectSize > 1 ? null : 'custom-select'\n        ]\"\n        v-model=\"localValue\"\n        :id=\"computedID\"\n        :name=\"name\"\n        :multiple=\"multiple || null\"\n        :size=\"(multiple || selectSize > 1) ? selectSize : null\"\n        :disabled=\"disabled\"\n        :required=\"required\"\n        :aria-required=\"required ? true : null\"\n        :aria-invalid=\"computedAriaInvalid\"\n        @change=\"handleChange\" >\n        <option v-for=\"(option, idx) in formOptions\"\n            :key=\"`dr-opt-${idx}`\"\n            :value=\"option.value\"\n            :disabled=\"Boolean(option.disabled)\">\n                {{ option.text }}\n        </option>\n        <slot />\n    </select>\n</template>\n\n<script>\nimport { guid } from '../../utils'\n\nexport default {\n    name: 'd-form-select',\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The element name.\n         */\n        name: {\n            type: String\n        },\n        /**\n         * The select options.\n         */\n        options: {\n            type: [Array, Object],\n            default() {\n                return []\n            }\n        },\n        /**\n         * The select value.\n         */\n        value: {},\n        /**\n         * Whether it should allow multiple selections, or not.\n         */\n        multiple: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * How many options should be visible.\n         */\n        selectSize: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * Controls the `aria-invalid` attribute.\n         */\n        ariaInvalid: {\n            type: [Boolean, String],\n            default: false\n        },\n        /**\n         * The value field.\n         */\n        valueField: {\n            type: String,\n            default: 'value'\n        },\n        /**\n         * The disabled field.\n         */\n        disabledField: {\n            type: String,\n            default: 'disabled'\n        },\n        /**\n         * The text field.\n         */\n        textField: {\n            type: String,\n            default: 'text'\n        },\n        /**\n         * The disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The required state.\n         */\n        required: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The validity state (invalid, valid, true, false).\n         */\n        state: {\n            type: [Boolean, String],\n            default: null,\n            validator: v => ['valid', 'invalid', true, false, null].includes(v)\n        },\n        /**\n         * The form control size (sm, lg).\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: v => ['sm', 'lg', null].includes(v)\n        }\n    },\n    data() {\n        return {\n            localValue: this.value\n        }\n    },\n    watch: {\n        value(newVal) {\n            this.localValue = newVal\n        },\n\n        localValue() {\n            this.$emit('input', this.localValue)\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `dr-select-${guid()}`\n        },\n\n        computedState() {\n            if (this.state === true || this.state === 'valid') {\n                return true\n            }\n\n            if (this.state === false || this.state === 'invalid') {\n                return false\n            }\n\n            return null\n        },\n\n        stateClass() {\n            if (this.computedState === true) {\n                return 'is-valid'\n            } else if (this.computedState === false) {\n                return 'is-invalid'\n            }\n\n            return null\n        },\n\n        computedAriaInvalid() {\n            if (this.ariaInvalid === true || this.ariaInvalid === 'true') {\n                return 'true';\n            }\n\n            return this.stateClass == 'is-invalid' ? 'true' : null;\n        },\n\n        formOptions() {\n            let options = this.options || {}\n            const valueField = this.valueField || 'value'\n            const textField = this.textField || 'text'\n            const disabledField = this.disabledField || 'disabled'\n\n            // Parse array options\n            if (Array.isArray(options)) {\n                return options.map(option => {\n                    if (typeof option === 'object') {\n                        return {\n                            value: option[valueField],\n                            text: String(option[textField]),\n                            disabled: option[disabledField] || false\n                        }\n                    }\n\n                    return { text: String(option), value: option, disabled: false }\n                })\n\n            // Parse object options\n            } else if (typeof options === 'object') {\n                return Object.keys(options).map(key => {\n                    let option = options[key] || {}\n\n                    if (typeof option === 'object') {\n                        const value = option[valueField]\n                        const text = option[textField]\n\n                        return {\n                            text: typeof text === 'undefined' ? key : String(text),\n                            value: typeof value === 'undefined' ? key : value,\n                            disabled: option[disabledField] || false\n                        }\n                    }\n\n                    return { text: String(option), value: key, disabled: false }\n                })\n            }\n\n            return []\n        }\n    },\n    methods: {\n        handleChange(evt) {\n            const target = evt.target;\n            const selectedVal = Array.from(target.options)\n                                    .filter(opt => opt.selected)\n                                    .map(opt => '_value' in opt ? opt._value : opt.value)\n\n            this.localValue = target.multiple ? selectedVal : selectedVal[0];\n            this.$emit('change', this.localValue);\n        }\n    }\n}\n</script>\n\n<style scoped>\n    .custom-select {\n        -webkit-appearance: none;\n        -moz-appearance: none;\n        appearance: none;\n    }\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$z = "data-v-034fa7f4";
+      var __vue_scope_id__$z = "data-v-55b297fc";
       /* module identifier */
       var __vue_module_identifier__$z = undefined;
       /* functional template */
       var __vue_is_functional_template__$z = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormSelect = normalizeComponent_1(
+      var __vue_component__$z = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
         __vue_inject_styles__$z,
         __vue_script__$z,
         __vue_scope_id__$z,
         __vue_is_functional_template__$z,
         __vue_module_identifier__$z,
+        false,
         browser,
+        undefined,
         undefined
       );
 
     var components$g = {
-        dFormSelect: dFormSelect,
-        dSelect: dFormSelect
+        dFormSelect: __vue_component__$z,
+        dSelect: __vue_component__$z
     };
 
     var VuePlugin$g = {
@@ -8973,22 +9117,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dFormTextarea = normalizeComponent_1(
+      var __vue_component__$A = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
         __vue_inject_styles__$A,
         __vue_script__$A,
         __vue_scope_id__$A,
         __vue_is_functional_template__$A,
         __vue_module_identifier__$A,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$h = {
-        dFormTextarea: dFormTextarea,
-        dTextarea: dFormTextarea
+        dFormTextarea: __vue_component__$A,
+        dTextarea: __vue_component__$A
     };
 
     var VuePlugin$h = {
@@ -9116,6 +9264,8 @@
                 if (this.right) {
                     return 'float-right'
                 }
+
+                return '';
             }
         }
     };
@@ -9160,22 +9310,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dImg = normalizeComponent_1(
+      var __vue_component__$B = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
         __vue_inject_styles__$B,
         __vue_script__$B,
         __vue_scope_id__$B,
         __vue_is_functional_template__$B,
         __vue_module_identifier__$B,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$i = {
-        dImg: dImg,
-        dImage: dImg
+        dImg: __vue_component__$B,
+        dImage: __vue_component__$B
     };
 
     var VuePlugin$i = {
@@ -9236,15 +9390,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var InputGroupText = normalizeComponent_1(
+      var __vue_component__$C = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$C, staticRenderFns: __vue_staticRenderFns__$C },
         __vue_inject_styles__$C,
         __vue_script__$C,
         __vue_scope_id__$C,
         __vue_is_functional_template__$C,
         __vue_module_identifier__$C,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -9254,7 +9412,7 @@
     var script$D = {
         name: 'd-input-group-addon',
         components: {
-            InputGroupText: InputGroupText
+            InputGroupText: __vue_component__$C
         },
         props: {
             /**
@@ -9333,15 +9491,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var InputGroupAddon = normalizeComponent_1(
+      var __vue_component__$D = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$D, staticRenderFns: __vue_staticRenderFns__$D },
         __vue_inject_styles__$D,
         __vue_script__$D,
         __vue_scope_id__$D,
         __vue_is_functional_template__$D,
         __vue_module_identifier__$D,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -9351,8 +9513,8 @@
     var script$E = {
         name: 'd-input-group',
         components: {
-            InputGroupAddon: InputGroupAddon,
-            InputGroupText: InputGroupText
+            InputGroupAddon: __vue_component__$D,
+            InputGroupText: __vue_component__$C
         },
         props: {
             /**
@@ -9474,7 +9636,7 @@
       /* style */
       var __vue_inject_styles__$E = function (inject) {
         if (!inject) { return }
-        inject("data-v-5e29bcc2_0", { source: "\n.input-group input:focus {\n    position: relative;\n    z-index: 3;\n}\n\n/* Adjust dropdowns inside input groups. */\n.input-group > .input-group-prepend > .d-dropdown > .btn {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n.input-group > .input-group-append > .d-dropdown > .btn {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n\n/* Datepickers */\n.vdp-datepicker:not(:last-child) input {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n.vdp-datepicker:not(:first-child) input {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n.vdp-datepicker + .vdp-datepicker {\n    margin-left: -1px;\n}\n.input-group-sm .vdp-datepicker input {\n    height: 1.9375rem;\n    font-size: 0.875rem;\n    line-height: 1.5;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/input-group/InputGroup.vue"],"names":[],"mappings":";AAwFA;IACA,kBAAA;IACA,UAAA;AACA;;AAEA,0CAAA;AACA;IACA,0BAAA;IACA,6BAAA;AACA;AAEA;IACA,yBAAA;IACA,4BAAA;AACA;;AAEA,gBAAA;AACA;IACA,0BAAA;IACA,6BAAA;AACA;AAEA;IACA,yBAAA;IACA,4BAAA;AACA;AAEA;IACA,iBAAA;AACA;AAEA;IACA,iBAAA;IACA,mBAAA;IACA,gBAAA;AACA","file":"InputGroup.vue","sourcesContent":["<template>\n    <component :is=\"tag\"\n        role=\"group\"\n        :id=\"id\"\n        :class=\"[\n            'input-group',\n            this.size ? `input-group-${this.size}` : '',\n            this.seamless ? 'input-group-seamless' : ''\n        ]\">\n        <InputGroupAddon v-if=\"prependIsUsed\" :prepend=\"Boolean(prepend || prependIsUsed)\">\n            <InputGroupText v-if=\"Boolean(prepend)\" v-html=\"prepend\"  />\n            <slot name=\"prepend\" />\n        </InputGroupAddon>\n        <slot />\n        <InputGroupAddon v-if=\"appendIsUsed\" :append=\"Boolean(append || appendIsUsed)\">\n            <InputGroupText v-if=\"Boolean(append)\" v-html=\"append\" />\n            <slot name=\"append\" />\n        </InputGroupAddon>\n    </component>\n</template>\n\n<script>\nimport InputGroupAddon from './InputGroupAddon.vue'\nimport InputGroupText from './InputGroupText.vue'\n\nexport default {\n    name: 'd-input-group',\n    components: {\n        InputGroupAddon,\n        InputGroupText\n    },\n    props: {\n        /**\n         * The element id.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The input group size.\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: v => ['sm', 'lg', null].includes(v)\n        },\n        /**\n         * The prepend value.\n         */\n        prepend: {\n            type: String,\n            default: null\n        },\n        /**\n         * The append value.\n         */\n        append: {\n            type: String,\n            default: null\n        },\n        /**\n         * Whether it should be seamless, or not.\n         */\n        seamless: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The element tag.\n         */\n        tag: {\n            type: String,\n            default: 'div'\n        }\n    },\n    computed: {\n        appendIsUsed() {\n            return !!this.$slots['append'] || this.append\n        },\n        prependIsUsed() {\n            return !!this.$slots['prepend'] || this.prepend\n        }\n    }\n}\n</script>\n\n<style>\n.input-group input:focus {\n    position: relative;\n    z-index: 3;\n}\n\n/* Adjust dropdowns inside input groups. */\n.input-group > .input-group-prepend > .d-dropdown > .btn {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n\n.input-group > .input-group-append > .d-dropdown > .btn {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n\n/* Datepickers */\n.vdp-datepicker:not(:last-child) input {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n\n.vdp-datepicker:not(:first-child) input {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n\n.vdp-datepicker + .vdp-datepicker {\n    margin-left: -1px;\n}\n\n.input-group-sm .vdp-datepicker input {\n    height: 1.9375rem;\n    font-size: 0.875rem;\n    line-height: 1.5;\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-2b04c823_0", { source: "\n.input-group input:focus {\n    position: relative;\n    z-index: 3;\n}\n\n/* Adjust dropdowns inside input groups. */\n.input-group > .input-group-prepend > .d-dropdown > .btn {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n.input-group > .input-group-append > .d-dropdown > .btn {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n\n/* Datepickers */\n.vdp-datepicker:not(:last-child) input {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n.vdp-datepicker:not(:first-child) input {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n.vdp-datepicker + .vdp-datepicker {\n    margin-left: -1px;\n}\n.input-group-sm .vdp-datepicker input {\n    height: 1.9375rem;\n    font-size: 0.875rem;\n    line-height: 1.5;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/input-group/InputGroup.vue"],"names":[],"mappings":";AAwFA;IACA,kBAAA;IACA,UAAA;AACA;;AAEA,0CAAA;AACA;IACA,0BAAA;IACA,6BAAA;AACA;AAEA;IACA,yBAAA;IACA,4BAAA;AACA;;AAEA,gBAAA;AACA;IACA,0BAAA;IACA,6BAAA;AACA;AAEA;IACA,yBAAA;IACA,4BAAA;AACA;AAEA;IACA,iBAAA;AACA;AAEA;IACA,iBAAA;IACA,mBAAA;IACA,gBAAA;AACA","file":"InputGroup.vue","sourcesContent":["<template>\n    <component :is=\"tag\"\n        role=\"group\"\n        :id=\"id\"\n        :class=\"[\n            'input-group',\n            this.size ? `input-group-${this.size}` : '',\n            this.seamless ? 'input-group-seamless' : ''\n        ]\">\n        <InputGroupAddon v-if=\"prependIsUsed\" :prepend=\"Boolean(prepend || prependIsUsed)\">\n            <InputGroupText v-if=\"Boolean(prepend)\" v-html=\"prepend\"  />\n            <slot name=\"prepend\" />\n        </InputGroupAddon>\n        <slot />\n        <InputGroupAddon v-if=\"appendIsUsed\" :append=\"Boolean(append || appendIsUsed)\">\n            <InputGroupText v-if=\"Boolean(append)\" v-html=\"append\" />\n            <slot name=\"append\" />\n        </InputGroupAddon>\n    </component>\n</template>\n\n<script>\nimport InputGroupAddon from './InputGroupAddon.vue'\nimport InputGroupText from './InputGroupText.vue'\n\nexport default {\n    name: 'd-input-group',\n    components: {\n        InputGroupAddon,\n        InputGroupText\n    },\n    props: {\n        /**\n         * The element id.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The input group size.\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: v => ['sm', 'lg', null].includes(v)\n        },\n        /**\n         * The prepend value.\n         */\n        prepend: {\n            type: String,\n            default: null\n        },\n        /**\n         * The append value.\n         */\n        append: {\n            type: String,\n            default: null\n        },\n        /**\n         * Whether it should be seamless, or not.\n         */\n        seamless: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The element tag.\n         */\n        tag: {\n            type: String,\n            default: 'div'\n        }\n    },\n    computed: {\n        appendIsUsed() {\n            return !!this.$slots['append'] || this.append\n        },\n        prependIsUsed() {\n            return !!this.$slots['prepend'] || this.prepend\n        }\n    }\n}\n</script>\n\n<style>\n.input-group input:focus {\n    position: relative;\n    z-index: 3;\n}\n\n/* Adjust dropdowns inside input groups. */\n.input-group > .input-group-prepend > .d-dropdown > .btn {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n\n.input-group > .input-group-append > .d-dropdown > .btn {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n\n/* Datepickers */\n.vdp-datepicker:not(:last-child) input {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n\n.vdp-datepicker:not(:first-child) input {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n\n.vdp-datepicker + .vdp-datepicker {\n    margin-left: -1px;\n}\n\n.input-group-sm .vdp-datepicker input {\n    height: 1.9375rem;\n    font-size: 0.875rem;\n    line-height: 1.5;\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
@@ -9485,23 +9647,27 @@
       var __vue_is_functional_template__$E = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dInputGroup = normalizeComponent_1(
+      var __vue_component__$E = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$E, staticRenderFns: __vue_staticRenderFns__$E },
         __vue_inject_styles__$E,
         __vue_script__$E,
         __vue_scope_id__$E,
         __vue_is_functional_template__$E,
         __vue_module_identifier__$E,
+        false,
         browser,
+        undefined,
         undefined
       );
 
     var components$j = {
-        dInputGroup: dInputGroup,
-        dInputGroupText: InputGroupText,
-        dInputGroupAddon: InputGroupAddon
+        dInputGroup: __vue_component__$E,
+        dInputGroupText: __vue_component__$C,
+        dInputGroupAddon: __vue_component__$D
     };
 
     var VuePlugin$j = {
@@ -9513,7 +9679,7 @@
     vueUse(VuePlugin$j);
 
     var components$k = {
-        dLink: dLink
+        dLink: __vue_component__$2
     };
 
     var VuePlugin$k = {
@@ -9587,15 +9753,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dListGroup = normalizeComponent_1(
+      var __vue_component__$F = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$F, staticRenderFns: __vue_staticRenderFns__$F },
         __vue_inject_styles__$F,
         __vue_script__$F,
         __vue_scope_id__$F,
         __vue_is_functional_template__$F,
         __vue_module_identifier__$F,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -9620,7 +9790,7 @@
     var script$G = {
         name: 'd-list-group-item',
         components: {
-            dLink: dLink
+            dLink: __vue_component__$2
         },
         props: Object.assign({}, _linkProps, {tag: {
                     type: String,
@@ -9705,22 +9875,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dListGroupItem = normalizeComponent_1(
+      var __vue_component__$G = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$G, staticRenderFns: __vue_staticRenderFns__$G },
         __vue_inject_styles__$G,
         __vue_script__$G,
         __vue_scope_id__$G,
         __vue_is_functional_template__$G,
         __vue_module_identifier__$G,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$l = {
-        dListGroup: dListGroup,
-        dListGroupItem: dListGroupItem
+        dListGroup: __vue_component__$F,
+        dListGroupItem: __vue_component__$G
     };
 
     var VuePlugin$l = {
@@ -9855,27 +10029,31 @@
       /* style */
       var __vue_inject_styles__$H = function (inject) {
         if (!inject) { return }
-        inject("data-v-30bb0787_0", { source: "\n.modal[data-v-30bb0787] {\n    display: block;\n    background-color: rgba(0,0,0,0.5);\n    transition: .3s;\n    overflow-y: auto;\n}\n.modal-dialog[data-v-30bb0787] {\n    transition: .3s;\n}\n.modal--no-backdrop[data-v-30bb0787] {\n    background: none;\n    pointer-events: none;\n}\n.fade-enter[data-v-30bb0787] {\n    transform: translate(0,0);\n    opacity: 1;\n}\n.fade-leave-active[data-v-30bb0787] {\n    transform: translate(0,0);\n    opacity: 1;\n}\n.fade-enter[data-v-30bb0787], .fade-leave-active[data-v-30bb0787] {\n    opacity: 0;\n}\n.fade-enter .modal-dialog[data-v-30bb0787],\n.fade-leave-active .modal-dialog[data-v-30bb0787] {\n    -webkit-transform: translate(0,-25%);\n    transform: translate(0,-25%);\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/modal/Modal.vue"],"names":[],"mappings":";AA4FA;IACA,cAAA;IACA,iCAAA;IACA,eAAA;IACA,gBAAA;AACA;AAEA;IACA,eAAA;AACA;AAEA;IACA,gBAAA;IACA,oBAAA;AACA;AAEA;IACA,yBAAA;IACA,UAAA;AACA;AAEA;IACA,yBAAA;IACA,UAAA;AACA;AAEA;IACA,UAAA;AACA;AAEA;;IAEA,oCAAA;IACA,4BAAA;AACA","file":"Modal.vue","sourcesContent":["<template>\n  <transition name=\"fade\">\n    <component :is=\"tag\"\n        :class=\"[\n            'modal',\n            this.noBackdrop ? 'modal--no-backdrop' : ''\n        ]\">\n      <div :class=\"[\n            'modal-dialog',\n            size ? `modal-${size}` : '',\n            centered ? `modal-dialog-centered` : '',\n        ]\"\n        role=\"document\"\n        v-on-clickaway=\"away\">\n        <div class=\"modal-content\">\n            <slot />\n        </div>\n      </div>\n    </component>\n  </transition>\n</template>\n\n<script>\nimport { mixin as clickAwayMixin } from 'vue-clickaway';\nimport { MODAL_EVENTS } from '../../utils/constants';\n\nexport default {\n    name: 'd-modal',\n    mixins: [clickAwayMixin],\n    props: {\n        /**\n         * The component tag.\n         */\n        tag: {\n            type: String,\n            default: \"div\"\n        },\n        /**\n         * The size (sm, lg).\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: v => ['sm', 'lg'].includes(v)\n        },\n        /**\n         * Hides the backdrop overlay.\n         */\n        noBackdrop: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether it is centered, or not.\n         */\n        centered: {\n            type: Boolean,\n            default: false\n        }\n    },\n  methods: {\n    away() {\n        if (this.noBackdrop) {\n            return;\n        }\n\n        /**\n         * Do not close modals when SWAL alert is opened over\n         */\n        if (document.querySelector('.swal2-container')) {\n            return;\n        }\n\n        /**\n         * @event close\n         *\n         * Triggered when the modal is closed.\n         */\n        this.$emit('close');\n\n        /**\n         * @event hidden\n         *\n         * Triggered when the modal is hidden.\n         */\n        this.$root.$emit(MODAL_EVENTS.HIDDEN)\n    }\n  },\n};\n</script>\n\n<style scoped>\n.modal {\n    display: block;\n    background-color: rgba(0,0,0,0.5);\n    transition: .3s;\n    overflow-y: auto;\n}\n\n.modal-dialog {\n    transition: .3s;\n}\n\n.modal--no-backdrop {\n    background: none;\n    pointer-events: none;\n}\n\n.fade-enter {\n    transform: translate(0,0);\n    opacity: 1;\n}\n\n.fade-leave-active {\n    transform: translate(0,0);\n    opacity: 1;\n}\n\n.fade-enter, .fade-leave-active {\n    opacity: 0;\n}\n\n.fade-enter .modal-dialog,\n.fade-leave-active .modal-dialog {\n    -webkit-transform: translate(0,-25%);\n    transform: translate(0,-25%);\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-2ffa8b0b_0", { source: "\n.modal[data-v-2ffa8b0b] {\n    display: block;\n    background-color: rgba(0,0,0,0.5);\n    transition: .3s;\n    overflow-y: auto;\n}\n.modal-dialog[data-v-2ffa8b0b] {\n    transition: .3s;\n}\n.modal--no-backdrop[data-v-2ffa8b0b] {\n    background: none;\n    pointer-events: none;\n}\n.fade-enter[data-v-2ffa8b0b] {\n    transform: translate(0,0);\n    opacity: 1;\n}\n.fade-leave-active[data-v-2ffa8b0b] {\n    transform: translate(0,0);\n    opacity: 1;\n}\n.fade-enter[data-v-2ffa8b0b], .fade-leave-active[data-v-2ffa8b0b] {\n    opacity: 0;\n}\n.fade-enter .modal-dialog[data-v-2ffa8b0b],\n.fade-leave-active .modal-dialog[data-v-2ffa8b0b] {\n    -webkit-transform: translate(0,-25%);\n    transform: translate(0,-25%);\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/modal/Modal.vue"],"names":[],"mappings":";AA4FA;IACA,cAAA;IACA,iCAAA;IACA,eAAA;IACA,gBAAA;AACA;AAEA;IACA,eAAA;AACA;AAEA;IACA,gBAAA;IACA,oBAAA;AACA;AAEA;IACA,yBAAA;IACA,UAAA;AACA;AAEA;IACA,yBAAA;IACA,UAAA;AACA;AAEA;IACA,UAAA;AACA;AAEA;;IAEA,oCAAA;IACA,4BAAA;AACA","file":"Modal.vue","sourcesContent":["<template>\n  <transition name=\"fade\">\n    <component :is=\"tag\"\n        :class=\"[\n            'modal',\n            this.noBackdrop ? 'modal--no-backdrop' : ''\n        ]\">\n      <div :class=\"[\n            'modal-dialog',\n            size ? `modal-${size}` : '',\n            centered ? `modal-dialog-centered` : '',\n        ]\"\n        role=\"document\"\n        v-on-clickaway=\"away\">\n        <div class=\"modal-content\">\n            <slot />\n        </div>\n      </div>\n    </component>\n  </transition>\n</template>\n\n<script>\nimport { mixin as clickAwayMixin } from 'vue-clickaway';\nimport { MODAL_EVENTS } from '../../utils/constants';\n\nexport default {\n    name: 'd-modal',\n    mixins: [clickAwayMixin],\n    props: {\n        /**\n         * The component tag.\n         */\n        tag: {\n            type: String,\n            default: \"div\"\n        },\n        /**\n         * The size (sm, lg).\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: v => ['sm', 'lg'].includes(v)\n        },\n        /**\n         * Hides the backdrop overlay.\n         */\n        noBackdrop: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether it is centered, or not.\n         */\n        centered: {\n            type: Boolean,\n            default: false\n        }\n    },\n  methods: {\n    away() {\n        if (this.noBackdrop) {\n            return;\n        }\n\n        /**\n         * Do not close modals when SWAL alert is opened over\n         */\n        if (document.querySelector('.swal2-container')) {\n            return;\n        }\n\n        /**\n         * @event close\n         *\n         * Triggered when the modal is closed.\n         */\n        this.$emit('close');\n\n        /**\n         * @event hidden\n         *\n         * Triggered when the modal is hidden.\n         */\n        this.$root.$emit(MODAL_EVENTS.HIDDEN)\n    }\n  },\n};\n</script>\n\n<style scoped>\n.modal {\n    display: block;\n    background-color: rgba(0,0,0,0.5);\n    transition: .3s;\n    overflow-y: auto;\n}\n\n.modal-dialog {\n    transition: .3s;\n}\n\n.modal--no-backdrop {\n    background: none;\n    pointer-events: none;\n}\n\n.fade-enter {\n    transform: translate(0,0);\n    opacity: 1;\n}\n\n.fade-leave-active {\n    transform: translate(0,0);\n    opacity: 1;\n}\n\n.fade-enter, .fade-leave-active {\n    opacity: 0;\n}\n\n.fade-enter .modal-dialog,\n.fade-leave-active .modal-dialog {\n    -webkit-transform: translate(0,-25%);\n    transform: translate(0,-25%);\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$H = "data-v-30bb0787";
+      var __vue_scope_id__$H = "data-v-2ffa8b0b";
       /* module identifier */
       var __vue_module_identifier__$H = undefined;
       /* functional template */
       var __vue_is_functional_template__$H = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dModal = normalizeComponent_1(
+      var __vue_component__$H = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$H, staticRenderFns: __vue_staticRenderFns__$H },
         __vue_inject_styles__$H,
         __vue_script__$H,
         __vue_scope_id__$H,
         __vue_is_functional_template__$H,
         __vue_module_identifier__$H,
+        false,
         browser,
+        undefined,
         undefined
       );
 
@@ -9884,7 +10062,7 @@
     var script$I = {
         name: 'd-modal-header',
         components: {
-            dBtnClose: dBtnClose
+            dBtnClose: __vue_component__
         },
         props: {
             /**
@@ -9952,15 +10130,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dModalHeader = normalizeComponent_1(
+      var __vue_component__$I = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$I, staticRenderFns: __vue_staticRenderFns__$I },
         __vue_inject_styles__$I,
         __vue_script__$I,
         __vue_scope_id__$I,
         __vue_is_functional_template__$I,
         __vue_module_identifier__$I,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -10015,15 +10197,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dModalTitle = normalizeComponent_1(
+      var __vue_component__$J = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$J, staticRenderFns: __vue_staticRenderFns__$J },
         __vue_inject_styles__$J,
         __vue_script__$J,
         __vue_scope_id__$J,
         __vue_is_functional_template__$J,
         __vue_module_identifier__$J,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -10078,15 +10264,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dModalBody = normalizeComponent_1(
+      var __vue_component__$K = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$K, staticRenderFns: __vue_staticRenderFns__$K },
         __vue_inject_styles__$K,
         __vue_script__$K,
         __vue_scope_id__$K,
         __vue_is_functional_template__$K,
         __vue_module_identifier__$K,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -10141,25 +10331,29 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dModalFooter = normalizeComponent_1(
+      var __vue_component__$L = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$L, staticRenderFns: __vue_staticRenderFns__$L },
         __vue_inject_styles__$L,
         __vue_script__$L,
         __vue_scope_id__$L,
         __vue_is_functional_template__$L,
         __vue_module_identifier__$L,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$m = {
-        dModal: dModal,
-        dModalHeader: dModalHeader,
-        dModalTitle: dModalTitle,
-        dModalBody: dModalBody,
-        dModalFooter: dModalFooter
+        dModal: __vue_component__$H,
+        dModalHeader: __vue_component__$I,
+        dModalTitle: __vue_component__$J,
+        dModalBody: __vue_component__$K,
+        dModalFooter: __vue_component__$L
     };
 
     var VuePlugin$m = {
@@ -10272,15 +10466,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dNav = normalizeComponent_1(
+      var __vue_component__$M = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$M, staticRenderFns: __vue_staticRenderFns__$M },
         __vue_inject_styles__$M,
         __vue_script__$M,
         __vue_scope_id__$M,
         __vue_is_functional_template__$M,
         __vue_module_identifier__$M,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -10293,7 +10491,7 @@
     var script$N = {
         name: 'd-nav-item',
         components: {
-            dLink: dLink
+            dLink: __vue_component__$2
         },
         props: createLinkProps()
     };
@@ -10335,22 +10533,26 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dNavItem = normalizeComponent_1(
+      var __vue_component__$N = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$N, staticRenderFns: __vue_staticRenderFns__$N },
         __vue_inject_styles__$N,
         __vue_script__$N,
         __vue_scope_id__$N,
         __vue_is_functional_template__$N,
         __vue_module_identifier__$N,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$n = {
-        dNav: dNav,
-        dNavItem: dNavItem
+        dNav: __vue_component__$M,
+        dNavItem: __vue_component__$N
     };
 
     var VuePlugin$n = {
@@ -10453,15 +10655,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dNavbar = normalizeComponent_1(
+      var __vue_component__$O = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$O, staticRenderFns: __vue_staticRenderFns__$O },
         __vue_inject_styles__$O,
         __vue_script__$O,
         __vue_scope_id__$O,
         __vue_is_functional_template__$O,
         __vue_module_identifier__$O,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -10474,7 +10680,7 @@
     var script$P = {
         name: 'd-navbar-brand',
         components: {
-            dLink: dLink
+            dLink: __vue_component__$2
         },
         props: Object.assign({}, createLinkProps(), {tag: {
                     type: String,
@@ -10522,15 +10728,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dNavbarBrand = normalizeComponent_1(
+      var __vue_component__$P = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$P, staticRenderFns: __vue_staticRenderFns__$P },
         __vue_inject_styles__$P,
         __vue_script__$P,
         __vue_scope_id__$P,
         __vue_is_functional_template__$P,
         __vue_module_identifier__$P,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -10610,15 +10820,19 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dNavbarNav = normalizeComponent_1(
+      var __vue_component__$Q = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$Q, staticRenderFns: __vue_staticRenderFns__$Q },
         __vue_inject_styles__$Q,
         __vue_script__$Q,
         __vue_scope_id__$Q,
         __vue_is_functional_template__$Q,
         __vue_module_identifier__$Q,
+        false,
+        undefined,
         undefined,
         undefined
       );
@@ -10702,24 +10916,28 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dNavbarToggle = normalizeComponent_1(
+      var __vue_component__$R = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$R, staticRenderFns: __vue_staticRenderFns__$R },
         __vue_inject_styles__$R,
         __vue_script__$R,
         __vue_scope_id__$R,
         __vue_is_functional_template__$R,
         __vue_module_identifier__$R,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$o = {
-        dNavbar: dNavbar,
-        dNavbarBrand: dNavbarBrand,
-        dNavbarNav: dNavbarNav,
-        dNavbarToggle: dNavbarToggle
+        dNavbar: __vue_component__$O,
+        dNavbarBrand: __vue_component__$P,
+        dNavbarNav: __vue_component__$Q,
+        dNavbarToggle: __vue_component__$R
     };
 
     var VuePlugin$o = {
@@ -12075,21 +12293,25 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dPopover = normalizeComponent_1(
+      var __vue_component__$S = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$S, staticRenderFns: __vue_staticRenderFns__$S },
         __vue_inject_styles__$S,
         __vue_script__$S,
         __vue_scope_id__$S,
         __vue_is_functional_template__$S,
         __vue_module_identifier__$S,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$p = {
-        dPopover: dPopover
+        dPopover: __vue_component__$S
     };
 
     var VuePlugin$p = {
@@ -12214,7 +12436,7 @@
       /* style */
       var __vue_inject_styles__$T = function (inject) {
         if (!inject) { return }
-        inject("data-v-32cd1480_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide labels for small progress bars */\n.progress-sm span {\n    color: transparent;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/progress/Progress.vue"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAwFA,wCAAA;AACA;IACA,kBAAA;AACA","file":"Progress.vue","sourcesContent":["<template>\n    <div :class=\"['progress', size ? `progress-${size}` : '']\" :style=\"{ height: height || null }\">\n        <slot>\n            <d-progress-bar v-bind=\"$props\"/>\n        </slot>\n    </div>\n</template>\n\n<script>\nexport default {\n    name: 'd-progress',\n    props: {\n        /**\n         * Theme color.\n         */\n        theme: {\n            type: String,\n            default: 'primary'\n        },\n        /**\n         * Whether it should be striped, or not.\n         */\n        striped: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether it should be animated, or not.\n         */\n        animated: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Height value.\n         */\n        height: {\n            type: String,\n            default: null\n        },\n        /**\n         * Precision number of digits.\n         */\n        precision: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * Whether to show progress, or not.\n         */\n        showProgress: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether to show the value, or not.\n         */\n        showValue: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The maximum value.\n         */\n        max: {\n            type: Number,\n            default: 100\n        },\n        /**\n         * The value.\n         */\n        value: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * The size.\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: (v) => ['sm', 'lg'].includes(v)\n        }\n    }\n}\n</script>\n\n<style>\n    /* Hide labels for small progress bars */\n    .progress-sm span {\n        color: transparent;\n    }\n</style>\n"]}, media: undefined });
+        inject("data-v-7cb6e3bc_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Hide labels for small progress bars */\n.progress-sm span {\n    color: transparent;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/progress/Progress.vue"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAwFA,wCAAA;AACA;IACA,kBAAA;AACA","file":"Progress.vue","sourcesContent":["<template>\n    <div :class=\"['progress', size ? `progress-${size}` : '']\" :style=\"{ height: height || null }\">\n        <slot>\n            <d-progress-bar v-bind=\"$props\"/>\n        </slot>\n    </div>\n</template>\n\n<script>\nexport default {\n    name: 'd-progress',\n    props: {\n        /**\n         * Theme color.\n         */\n        theme: {\n            type: String,\n            default: 'primary'\n        },\n        /**\n         * Whether it should be striped, or not.\n         */\n        striped: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether it should be animated, or not.\n         */\n        animated: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Height value.\n         */\n        height: {\n            type: String,\n            default: null\n        },\n        /**\n         * Precision number of digits.\n         */\n        precision: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * Whether to show progress, or not.\n         */\n        showProgress: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether to show the value, or not.\n         */\n        showValue: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The maximum value.\n         */\n        max: {\n            type: Number,\n            default: 100\n        },\n        /**\n         * The value.\n         */\n        value: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * The size.\n         */\n        size: {\n            type: String,\n            default: null,\n            validator: (v) => ['sm', 'lg'].includes(v)\n        }\n    }\n}\n</script>\n\n<style>\n    /* Hide labels for small progress bars */\n    .progress-sm span {\n        color: transparent;\n    }\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
@@ -12225,16 +12447,20 @@
       var __vue_is_functional_template__$T = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dProgress = normalizeComponent_1(
+      var __vue_component__$T = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$T, staticRenderFns: __vue_staticRenderFns__$T },
         __vue_inject_styles__$T,
         __vue_script__$T,
         __vue_scope_id__$T,
         __vue_is_functional_template__$T,
         __vue_module_identifier__$T,
+        false,
         browser,
+        undefined,
         undefined
       );
 
@@ -12412,33 +12638,37 @@
       /* style */
       var __vue_inject_styles__$U = function (inject) {
         if (!inject) { return }
-        inject("data-v-32f1d2cd_0", { source: "\n.progress-bar[data-v-32f1d2cd] {\n    height: 100%;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/progress/ProgressBar.vue"],"names":[],"mappings":";AAuHA;IACA,YAAA;AACA","file":"ProgressBar.vue","sourcesContent":["<template>\n    <div :class=\"[\n        'progress-bar',\n        computedTheme ? `bg-${computedTheme}` : '',\n        (computedStriped || computedAnimated) ? 'progress-bar-striped' : '',\n        computedAnimated ? 'progress-bar-animated' : ''\n    ]\"\n    :style=\"{ width: (100 * (value / computedMax)) + '%' }\"\n    role=\"progressbar\"\n    :aria-valuemin=\"0\"\n    :aria-valuemax=\"computedMax.toString()\"\n    :aria-valuenow=\"value.toFixed(computedPrecision)\">\n        <slot>\n            <span v-if=\"label\" v-html=\"label\"></span>\n            <span v-if=\"computedShowProgress\">{{ computedProgress.toFixed(computedPrecision) }}</span>\n            <span v-if=\"computedShowValue\">{{ value.toFixed(computedPrecision) }}</span>\n        </slot>\n    </div>\n</template>\n\n<script>\nexport default {\n    name: 'd-progress-bar',\n    props: {\n        /**\n         * The value.\n         */\n        value: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * The label.\n         */\n        label: {\n            type: String,\n            value: null\n        },\n        /**\n         * The max value.\n         */\n        max: {\n            type: Number,\n            default: null\n        },\n        /**\n         * Precision number of digits.\n         */\n        precision: {\n            type: Number,\n            default: null\n        },\n        /**\n         * Theme color.\n         */\n        theme: {\n            type: String,\n            default: null\n        },\n        /**\n         * Whether it should be striped, or not.\n         */\n        striped: {\n            type: Boolean,\n            default: null\n        },\n        /**\n         * Whether it should be animated, or not.\n         */\n        animated: {\n            type: Boolean,\n            default: null\n        },\n        /**\n         * Whether it should show the progress, or not.\n         */\n        showProgress: {\n            type: Boolean,\n            default: null\n        },\n        /**\n         * Whether it should show the value, or not.\n         */\n        showValue: {\n            type: Boolean,\n            default: null\n        }\n    },\n    computed: {\n        computedTheme() {\n            return this.theme || this.$parent.theme\n        },\n        computedStriped() {\n            return typeof this.striped === 'boolean' ? this.striped : (this.$parent.striped || false)\n        },\n        computedAnimated() {\n            return typeof this.animated === 'boolean' ? this.animated : (this.$parent.animated || false)\n        },\n        computedMax() {\n            return typeof this.max === 'number' ? this.max : (this.$parent.max || 100)\n        },\n        computedPrecision() {\n            return typeof this.precision === 'number' ? this.precision : (this.$parent.precision || 0)\n        },\n        computedShowProgress() {\n            return typeof this.showProgress === 'boolean' ? this.showProgress : (this.$parent.showProgress || false)\n        },\n        computedShowValue() {\n            return typeof this.showValue === 'boolean' ? this.showValue : (this.$parent.showValue || false)\n        },\n        computedProgress() {\n            const p = Math.pow(10, this.computedPrecision)\n            return Math.round((100 * p * this.value) / this.computedMax) / p\n        }\n    }\n}\n</script>\n\n<style scoped>\n.progress-bar {\n    height: 100%;\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-00ca09c9_0", { source: "\n.progress-bar[data-v-00ca09c9] {\n    height: 100%;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/progress/ProgressBar.vue"],"names":[],"mappings":";AAuHA;IACA,YAAA;AACA","file":"ProgressBar.vue","sourcesContent":["<template>\n    <div :class=\"[\n        'progress-bar',\n        computedTheme ? `bg-${computedTheme}` : '',\n        (computedStriped || computedAnimated) ? 'progress-bar-striped' : '',\n        computedAnimated ? 'progress-bar-animated' : ''\n    ]\"\n    :style=\"{ width: (100 * (value / computedMax)) + '%' }\"\n    role=\"progressbar\"\n    :aria-valuemin=\"0\"\n    :aria-valuemax=\"computedMax.toString()\"\n    :aria-valuenow=\"value.toFixed(computedPrecision)\">\n        <slot>\n            <span v-if=\"label\" v-html=\"label\"></span>\n            <span v-if=\"computedShowProgress\">{{ computedProgress.toFixed(computedPrecision) }}</span>\n            <span v-if=\"computedShowValue\">{{ value.toFixed(computedPrecision) }}</span>\n        </slot>\n    </div>\n</template>\n\n<script>\nexport default {\n    name: 'd-progress-bar',\n    props: {\n        /**\n         * The value.\n         */\n        value: {\n            type: Number,\n            default: 0\n        },\n        /**\n         * The label.\n         */\n        label: {\n            type: String,\n            value: null\n        },\n        /**\n         * The max value.\n         */\n        max: {\n            type: Number,\n            default: null\n        },\n        /**\n         * Precision number of digits.\n         */\n        precision: {\n            type: Number,\n            default: null\n        },\n        /**\n         * Theme color.\n         */\n        theme: {\n            type: String,\n            default: null\n        },\n        /**\n         * Whether it should be striped, or not.\n         */\n        striped: {\n            type: Boolean,\n            default: null\n        },\n        /**\n         * Whether it should be animated, or not.\n         */\n        animated: {\n            type: Boolean,\n            default: null\n        },\n        /**\n         * Whether it should show the progress, or not.\n         */\n        showProgress: {\n            type: Boolean,\n            default: null\n        },\n        /**\n         * Whether it should show the value, or not.\n         */\n        showValue: {\n            type: Boolean,\n            default: null\n        }\n    },\n    computed: {\n        computedTheme() {\n            return this.theme || this.$parent.theme\n        },\n        computedStriped() {\n            return typeof this.striped === 'boolean' ? this.striped : (this.$parent.striped || false)\n        },\n        computedAnimated() {\n            return typeof this.animated === 'boolean' ? this.animated : (this.$parent.animated || false)\n        },\n        computedMax() {\n            return typeof this.max === 'number' ? this.max : (this.$parent.max || 100)\n        },\n        computedPrecision() {\n            return typeof this.precision === 'number' ? this.precision : (this.$parent.precision || 0)\n        },\n        computedShowProgress() {\n            return typeof this.showProgress === 'boolean' ? this.showProgress : (this.$parent.showProgress || false)\n        },\n        computedShowValue() {\n            return typeof this.showValue === 'boolean' ? this.showValue : (this.$parent.showValue || false)\n        },\n        computedProgress() {\n            const p = Math.pow(10, this.computedPrecision)\n            return Math.round((100 * p * this.value) / this.computedMax) / p\n        }\n    }\n}\n</script>\n\n<style scoped>\n.progress-bar {\n    height: 100%;\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$U = "data-v-32f1d2cd";
+      var __vue_scope_id__$U = "data-v-00ca09c9";
       /* module identifier */
       var __vue_module_identifier__$U = undefined;
       /* functional template */
       var __vue_is_functional_template__$U = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dProgressBar = normalizeComponent_1(
+      var __vue_component__$U = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$U, staticRenderFns: __vue_staticRenderFns__$U },
         __vue_inject_styles__$U,
         __vue_script__$U,
         __vue_scope_id__$U,
         __vue_is_functional_template__$U,
         __vue_module_identifier__$U,
+        false,
         browser,
+        undefined,
         undefined
       );
 
     var components$q = {
-        dProgress: dProgress,
-        dProgressBar: dProgressBar
+        dProgress: __vue_component__$T,
+        dProgressBar: __vue_component__$U
     };
 
     var VuePlugin$q = {
@@ -12575,21 +12805,25 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dSlider = normalizeComponent_1(
+      var __vue_component__$V = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$V, staticRenderFns: __vue_staticRenderFns__$V },
         __vue_inject_styles__$V,
         __vue_script__$V,
         __vue_scope_id__$V,
         __vue_is_functional_template__$V,
         __vue_module_identifier__$V,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$r = {
-        dSlider: dSlider
+        dSlider: __vue_component__$V
     };
 
     var VuePlugin$r = {
@@ -12733,27 +12967,31 @@
       /* style */
       var __vue_inject_styles__$W = function (inject) {
         if (!inject) { return }
-        inject("data-v-50645694_0", { source: "\n.nav-link.active[data-v-50645694] {\n    border-bottom: 1px solid transparent;\n}\n.nav-link[data-v-50645694]:hover {\n    cursor: pointer;\n}\n.nav-link.disabled[data-v-50645694]:hover {\n    cursor: not-allowed;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/tabs/_TabButton.vue"],"names":[],"mappings":";AAsHA;IACA,oCAAA;AACA;AAEA;IACA,eAAA;AACA;AAEA;IACA,mBAAA;AACA","file":"_TabButton.vue","sourcesContent":["<template>\n    <li :class=\"['nav-item', itemClass]\" role=\"presentation\">\n        <a :class=\"[\n            'nav-link',\n            active ? 'active' : '',\n            disabled ? 'disabled' : '',\n            linkClass\n        ]\"\n        role=\"tab\"\n        tabindex=\"-1\"\n        :id=\"computedID\"\n        :disabled=\"disabled\"\n        :aria-selected=\"active ? 'true' : 'false'\"\n        :aria-setsize=\"setSize\"\n        :aria-posinset=\"posInSet\"\n        :aria-controls=\"controls\"\n        v-html=\"content\"\n        @click=\"handleClick\"\n        @keydown=\"handleClick\" />\n    </li>\n</template>\n\n<script>\nimport { guid } from '../../utils'\nimport { KEYCODES } from '../../utils/constants';\n\nexport default {\n    name: 'd-tab-button',\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The active state.\n         */\n        active: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The link class.\n         */\n        linkClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The item class.\n         */\n        itemClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The aria-setsize value.\n         */\n        setSize: {\n            type: Number,\n            default: 0,\n        },\n        /**\n         * The position in set value (aria-posinset).\n         */\n        posInSet: {\n            type: Number,\n            default: 0,\n        },\n        /**\n         * The aria-controls value.\n         */\n        controls: {\n            type: String,\n            default: null\n        },\n        /**\n         * The content.\n         */\n        content: {\n            type: String,\n            default: null\n        }\n    },\n    methods: {\n        handleClick(e) {\n            if (this.disabled) {\n                e.preventDefault()\n                e.stopPropagation()\n            }\n\n            if (e.type === 'click'\n                || e.keyCode === KEYCODES.ENTER\n                || e.keyCode === KEYCODES.SPACE) {\n                e.preventDefault()\n                e.stopPropagation()\n                this.$emit('click', e)\n            }\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `d-tab-btn-${guid()}`\n        }\n    }\n}\n</script>\n\n<style scoped>\n.nav-link.active {\n    border-bottom: 1px solid transparent;\n}\n\n.nav-link:hover {\n    cursor: pointer;\n}\n\n.nav-link.disabled:hover {\n    cursor: not-allowed;\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-762bb78c_0", { source: "\n.nav-link.active[data-v-762bb78c] {\n    border-bottom: 1px solid transparent;\n}\n.nav-link[data-v-762bb78c]:hover {\n    cursor: pointer;\n}\n.nav-link.disabled[data-v-762bb78c]:hover {\n    cursor: not-allowed;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/tabs/_TabButton.vue"],"names":[],"mappings":";AAsHA;IACA,oCAAA;AACA;AAEA;IACA,eAAA;AACA;AAEA;IACA,mBAAA;AACA","file":"_TabButton.vue","sourcesContent":["<template>\n    <li :class=\"['nav-item', itemClass]\" role=\"presentation\">\n        <a :class=\"[\n            'nav-link',\n            active ? 'active' : '',\n            disabled ? 'disabled' : '',\n            linkClass\n        ]\"\n        role=\"tab\"\n        tabindex=\"-1\"\n        :id=\"computedID\"\n        :disabled=\"disabled\"\n        :aria-selected=\"active ? 'true' : 'false'\"\n        :aria-setsize=\"setSize\"\n        :aria-posinset=\"posInSet\"\n        :aria-controls=\"controls\"\n        v-html=\"content\"\n        @click=\"handleClick\"\n        @keydown=\"handleClick\" />\n    </li>\n</template>\n\n<script>\nimport { guid } from '../../utils'\nimport { KEYCODES } from '../../utils/constants';\n\nexport default {\n    name: 'd-tab-button',\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The active state.\n         */\n        active: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The link class.\n         */\n        linkClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The item class.\n         */\n        itemClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The aria-setsize value.\n         */\n        setSize: {\n            type: Number,\n            default: 0,\n        },\n        /**\n         * The position in set value (aria-posinset).\n         */\n        posInSet: {\n            type: Number,\n            default: 0,\n        },\n        /**\n         * The aria-controls value.\n         */\n        controls: {\n            type: String,\n            default: null\n        },\n        /**\n         * The content.\n         */\n        content: {\n            type: String,\n            default: null\n        }\n    },\n    methods: {\n        handleClick(e) {\n            if (this.disabled) {\n                e.preventDefault()\n                e.stopPropagation()\n            }\n\n            if (e.type === 'click'\n                || e.keyCode === KEYCODES.ENTER\n                || e.keyCode === KEYCODES.SPACE) {\n                e.preventDefault()\n                e.stopPropagation()\n                this.$emit('click', e)\n            }\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `d-tab-btn-${guid()}`\n        }\n    }\n}\n</script>\n\n<style scoped>\n.nav-link.active {\n    border-bottom: 1px solid transparent;\n}\n\n.nav-link:hover {\n    cursor: pointer;\n}\n\n.nav-link.disabled:hover {\n    cursor: not-allowed;\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$W = "data-v-50645694";
+      var __vue_scope_id__$W = "data-v-762bb78c";
       /* module identifier */
       var __vue_module_identifier__$W = undefined;
       /* functional template */
       var __vue_is_functional_template__$W = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dTabButton = normalizeComponent_1(
+      var __vue_component__$W = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$W, staticRenderFns: __vue_staticRenderFns__$W },
         __vue_inject_styles__$W,
         __vue_script__$W,
         __vue_scope_id__$W,
         __vue_is_functional_template__$W,
         __vue_module_identifier__$W,
+        false,
         browser,
+        undefined,
         undefined
       );
 
@@ -12762,7 +13000,7 @@
     var script$X = {
         name: 'd-tabs',
         components: {
-            dTabButton: dTabButton
+            dTabButton: __vue_component__$W
         },
         data: function data() {
             return {
@@ -13081,27 +13319,31 @@
       /* style */
       var __vue_inject_styles__$X = function (inject) {
         if (!inject) { return }
-        inject("data-v-5acf7b24_0", { source: "\n.d-tabs-vertical-nav[data-v-5acf7b24]:hover {\n    background: rgba(90, 97, 105, 0.06);\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/tabs/Tabs.vue"],"names":[],"mappings":";AA8RA;IACA,mCAAA;AACA","file":"Tabs.vue","sourcesContent":["<template>\n    <component :is=\"tag\"\n        :id=\"computedID\"\n        :class=\"computedTabsClasses\">\n\n        <div :class=\"computedNavListWrapperClasses\">\n            <ul :class=\"computedNavListClasses\"\n            role=\"tablist\"\n            tabindex='0'\n            :id=\"computedTabControlsID\"\n            @keydown=\"handleOnKeynav\">\n                <d-tab-button v-for=\"(tab, index) in tabs\" :key=\"index\"\n                    :content=\"tab.headHtml || tab.title\"\n                    :href=\"tab.href\"\n                    :id=\"computedTabButtonID\"\n                    :active=\"tab.localActiveState\"\n                    :disabled=\"tab.disabled\"\n                    :setSize=\"tabs.length\"\n                    :posInSet=\"index + 1\"\n                    :controls=\"_tabsContainerID\"\n                    :linkClass=\"tab.titleLinkClass\"\n                    :itemClass=\"tab.titleItemClass\"\n                    @click=\"setTab(index)\" />\n                <slot name=\"tabs\" />\n            </ul>\n        </div>\n\n        <div ref=\"tabsContainer\"\n            :class=\"computedTabsContainerClasses\"\n            :id=\"_tabsContainerID\">\n            <slot />\n        </div>\n    </component>\n</template>\n\n<script>\nimport { guid } from '../../utils'\nimport { KEYCODES } from '../../utils/constants'\nimport dTabButton from './_TabButton.vue'\n\nexport default {\n    name: 'd-tabs',\n    components: {\n        dTabButton\n    },\n    data() {\n        return {\n            currentTab: this.value,\n            tabs: [],\n            // eslint-disable-next-line\n            _tabsContainerID: null\n        }\n    },\n    watch: {\n        currentTab (newVal, oldVal) {\n            if (newVal === oldVal) {\n                return\n            }\n\n            this.$emit('input', newVal)\n            this.tabs[newVal].$emit('click')\n        },\n        value (newVal, oldVal) {\n            if (newVal === oldVal) {\n                return\n            }\n\n            if (typeof oldVal !== 'number') {\n                oldVal = 0\n            }\n\n            const direction = newVal < oldVal ? -1 : 1\n            this.setTab(newVal, false, direction)\n        }\n    },\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The element tag.\n         */\n        tag: {\n            type: String,\n            default: 'div'\n        },\n        /**\n         * Whether it should be displayed as a card, or not.\n         */\n        card: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The value used to set the current tab.\n         */\n        value: {\n            type: Number,\n            default: null\n        },\n        /**\n         * Whether the tab controls should be displayed as pills, or not.\n         */\n        pills: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether the tab controls should be displayed vertically, or not.\n         */\n        vertical: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The content class.\n         */\n        contentClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The nav class.\n         */\n        navClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The nav wrapper class.\n         */\n        navWrapperClass: {\n            type: String,\n            default: null\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `dr-tabs-${guid()}`\n        },\n        computedTabControlsID() {\n            return `dr-tab-controls-${guid()}`\n        },\n        computedTabButtonID() {\n            return `dr-tabs-tab-${guid()}`\n        },\n        navStyle() {\n            return this.pills ? 'pills' : 'tabs'\n        },\n        computedTabsClasses() {\n            return [\n                'tabs',\n                this.vertical ? 'row' : '',\n                (this.vertical && this.card) ? 'no-gutters' : '',\n            ]\n        },\n        computedNavListClasses() {\n            return [\n                'nav',\n                `nav-${this.navStyle}`,\n                (this.card && !this.vertical) ? `card-header-${this.navStyle}` : '',\n                (this.card && this.vertical) ? 'card-header' : '',\n                (this.card && this.vertical) ? 'h-100' : '',\n                this.vertical ? 'flex-column' : '',\n                this.vertical ? 'border-bottom-0' : '',\n                this.vertical ? 'rounded-0' : '',\n                this.vertical ? 'd-tabs-vertical-nav' : '',\n                this.navClass\n            ]\n        },\n        computedNavListWrapperClasses() {\n            return [\n                this.card && !this.vertical ? 'card-header' : '',\n                this.vertical ? 'col-auto' : '',\n                this.navWrapperClass\n            ]\n        },\n        computedTabsContainerClasses() {\n            return [\n                'tab-content',\n                this.vertical ? 'col' : '',\n                this.contentClass\n            ]\n        }\n    },\n    created() {\n        this._tabsContainerID = `tabs-container-${guid()}`\n    },\n    methods: {\n        handleOnKeynav(e) {\n            if (Object.keys(KEYCODES).some((k) => KEYCODES[k] === e.keyCode)) {\n                e.preventDefault()\n                e.stopPropagation()\n            }\n\n            if (e.keyCode === KEYCODES.UP || e.keyCode === KEYCODES.LEFT ) {\n                this.previousTab()\n            }\n\n            if (e.keyCode === KEYCODES.DOWN || e.keyCode === KEYCODES.RIGHT) {\n                this.nextTab()\n            }\n        },\n        nextTab() {\n            this.setTab(this.currentTab + 1, false, 1)\n        },\n        previousTab() {\n            this.setTab(this.currentTab - 1, false, -1)\n        },\n        setTab(index, force, direction) {\n            direction = direction || 0\n            index = index || 0\n\n            direction = direction === 0 ? 0 : (direction > 0 ? 1 : -1)\n\n            if (!force && index === this.currentTab) {\n                return\n            }\n\n            const tab = this.tabs[index]\n\n            if (!tab) {\n                this.$emit('input', this.currentTab)\n                return\n            }\n\n            if (tab.disabled) {\n                if (direction) {\n                    this.setTab(index + direction, force, direction)\n                }\n\n                return\n            }\n\n            this.tabs.forEach(_tab => {\n                if (_tab === tab) {\n                    this.$set(_tab, 'localActiveState', true)\n                    return\n                }\n\n                this.$set(_tab, 'localActiveState', false)\n            })\n\n            this.currentTab = index\n        },\n        updateTabs() {\n            this.tabs = this.$children.filter(child => child._isTab)\n            let tabIndex = null\n\n            this.tabs.forEach((tab, index) => {\n                if (tab.localActiveState && !tab.disabled) {\n                    tabIndex = index\n                }\n            })\n\n            if (tabIndex === null) {\n                if (this.currentTab >= this.tabs.length) {\n                    this.setTab(this.tabs.length - 1, true, -1)\n                    return\n                }\n\n                if (this.tabs[this.currentTab] && !this.tabs[this.currentTab].disabled) {\n                    tabIndex = this.currentTab\n                }\n\n                this.tabs.forEach((tab, index) => {\n                    if (!tab.disabled && tabIndex === null) {\n                        tabIndex = index\n                    }\n                })\n            }\n\n            this.setTab(tabIndex || 0, true, 0)\n        }\n    },\n    mounted() {\n        this.updateTabs()\n    }\n}\n</script>\n\n<style scoped>\n.d-tabs-vertical-nav:hover {\n    background: rgba(90, 97, 105, 0.06);\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-6a7a8ab0_0", { source: "\n.d-tabs-vertical-nav[data-v-6a7a8ab0]:hover {\n    background: rgba(90, 97, 105, 0.06);\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/tabs/Tabs.vue"],"names":[],"mappings":";AA8RA;IACA,mCAAA;AACA","file":"Tabs.vue","sourcesContent":["<template>\n    <component :is=\"tag\"\n        :id=\"computedID\"\n        :class=\"computedTabsClasses\">\n\n        <div :class=\"computedNavListWrapperClasses\">\n            <ul :class=\"computedNavListClasses\"\n            role=\"tablist\"\n            tabindex='0'\n            :id=\"computedTabControlsID\"\n            @keydown=\"handleOnKeynav\">\n                <d-tab-button v-for=\"(tab, index) in tabs\" :key=\"index\"\n                    :content=\"tab.headHtml || tab.title\"\n                    :href=\"tab.href\"\n                    :id=\"computedTabButtonID\"\n                    :active=\"tab.localActiveState\"\n                    :disabled=\"tab.disabled\"\n                    :setSize=\"tabs.length\"\n                    :posInSet=\"index + 1\"\n                    :controls=\"_tabsContainerID\"\n                    :linkClass=\"tab.titleLinkClass\"\n                    :itemClass=\"tab.titleItemClass\"\n                    @click=\"setTab(index)\" />\n                <slot name=\"tabs\" />\n            </ul>\n        </div>\n\n        <div ref=\"tabsContainer\"\n            :class=\"computedTabsContainerClasses\"\n            :id=\"_tabsContainerID\">\n            <slot />\n        </div>\n    </component>\n</template>\n\n<script>\nimport { guid } from '../../utils'\nimport { KEYCODES } from '../../utils/constants'\nimport dTabButton from './_TabButton.vue'\n\nexport default {\n    name: 'd-tabs',\n    components: {\n        dTabButton\n    },\n    data() {\n        return {\n            currentTab: this.value,\n            tabs: [],\n            // eslint-disable-next-line\n            _tabsContainerID: null\n        }\n    },\n    watch: {\n        currentTab (newVal, oldVal) {\n            if (newVal === oldVal) {\n                return\n            }\n\n            this.$emit('input', newVal)\n            this.tabs[newVal].$emit('click')\n        },\n        value (newVal, oldVal) {\n            if (newVal === oldVal) {\n                return\n            }\n\n            if (typeof oldVal !== 'number') {\n                oldVal = 0\n            }\n\n            const direction = newVal < oldVal ? -1 : 1\n            this.setTab(newVal, false, direction)\n        }\n    },\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The element tag.\n         */\n        tag: {\n            type: String,\n            default: 'div'\n        },\n        /**\n         * Whether it should be displayed as a card, or not.\n         */\n        card: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The value used to set the current tab.\n         */\n        value: {\n            type: Number,\n            default: null\n        },\n        /**\n         * Whether the tab controls should be displayed as pills, or not.\n         */\n        pills: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether the tab controls should be displayed vertically, or not.\n         */\n        vertical: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The content class.\n         */\n        contentClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The nav class.\n         */\n        navClass: {\n            type: String,\n            default: null\n        },\n        /**\n         * The nav wrapper class.\n         */\n        navWrapperClass: {\n            type: String,\n            default: null\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `dr-tabs-${guid()}`\n        },\n        computedTabControlsID() {\n            return `dr-tab-controls-${guid()}`\n        },\n        computedTabButtonID() {\n            return `dr-tabs-tab-${guid()}`\n        },\n        navStyle() {\n            return this.pills ? 'pills' : 'tabs'\n        },\n        computedTabsClasses() {\n            return [\n                'tabs',\n                this.vertical ? 'row' : '',\n                (this.vertical && this.card) ? 'no-gutters' : '',\n            ]\n        },\n        computedNavListClasses() {\n            return [\n                'nav',\n                `nav-${this.navStyle}`,\n                (this.card && !this.vertical) ? `card-header-${this.navStyle}` : '',\n                (this.card && this.vertical) ? 'card-header' : '',\n                (this.card && this.vertical) ? 'h-100' : '',\n                this.vertical ? 'flex-column' : '',\n                this.vertical ? 'border-bottom-0' : '',\n                this.vertical ? 'rounded-0' : '',\n                this.vertical ? 'd-tabs-vertical-nav' : '',\n                this.navClass\n            ]\n        },\n        computedNavListWrapperClasses() {\n            return [\n                this.card && !this.vertical ? 'card-header' : '',\n                this.vertical ? 'col-auto' : '',\n                this.navWrapperClass\n            ]\n        },\n        computedTabsContainerClasses() {\n            return [\n                'tab-content',\n                this.vertical ? 'col' : '',\n                this.contentClass\n            ]\n        }\n    },\n    created() {\n        this._tabsContainerID = `tabs-container-${guid()}`\n    },\n    methods: {\n        handleOnKeynav(e) {\n            if (Object.keys(KEYCODES).some((k) => KEYCODES[k] === e.keyCode)) {\n                e.preventDefault()\n                e.stopPropagation()\n            }\n\n            if (e.keyCode === KEYCODES.UP || e.keyCode === KEYCODES.LEFT ) {\n                this.previousTab()\n            }\n\n            if (e.keyCode === KEYCODES.DOWN || e.keyCode === KEYCODES.RIGHT) {\n                this.nextTab()\n            }\n        },\n        nextTab() {\n            this.setTab(this.currentTab + 1, false, 1)\n        },\n        previousTab() {\n            this.setTab(this.currentTab - 1, false, -1)\n        },\n        setTab(index, force, direction) {\n            direction = direction || 0\n            index = index || 0\n\n            direction = direction === 0 ? 0 : (direction > 0 ? 1 : -1)\n\n            if (!force && index === this.currentTab) {\n                return\n            }\n\n            const tab = this.tabs[index]\n\n            if (!tab) {\n                this.$emit('input', this.currentTab)\n                return\n            }\n\n            if (tab.disabled) {\n                if (direction) {\n                    this.setTab(index + direction, force, direction)\n                }\n\n                return\n            }\n\n            this.tabs.forEach(_tab => {\n                if (_tab === tab) {\n                    this.$set(_tab, 'localActiveState', true)\n                    return\n                }\n\n                this.$set(_tab, 'localActiveState', false)\n            })\n\n            this.currentTab = index\n        },\n        updateTabs() {\n            this.tabs = this.$children.filter(child => child._isTab)\n            let tabIndex = null\n\n            this.tabs.forEach((tab, index) => {\n                if (tab.localActiveState && !tab.disabled) {\n                    tabIndex = index\n                }\n            })\n\n            if (tabIndex === null) {\n                if (this.currentTab >= this.tabs.length) {\n                    this.setTab(this.tabs.length - 1, true, -1)\n                    return\n                }\n\n                if (this.tabs[this.currentTab] && !this.tabs[this.currentTab].disabled) {\n                    tabIndex = this.currentTab\n                }\n\n                this.tabs.forEach((tab, index) => {\n                    if (!tab.disabled && tabIndex === null) {\n                        tabIndex = index\n                    }\n                })\n            }\n\n            this.setTab(tabIndex || 0, true, 0)\n        }\n    },\n    mounted() {\n        this.updateTabs()\n    }\n}\n</script>\n\n<style scoped>\n.d-tabs-vertical-nav:hover {\n    background: rgba(90, 97, 105, 0.06);\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$X = "data-v-5acf7b24";
+      var __vue_scope_id__$X = "data-v-6a7a8ab0";
       /* module identifier */
       var __vue_module_identifier__$X = undefined;
       /* functional template */
       var __vue_is_functional_template__$X = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dTabs = normalizeComponent_1(
+      var __vue_component__$X = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$X, staticRenderFns: __vue_staticRenderFns__$X },
         __vue_inject_styles__$X,
         __vue_script__$X,
         __vue_scope_id__$X,
         __vue_is_functional_template__$X,
         __vue_module_identifier__$X,
+        false,
         browser,
+        undefined,
         undefined
       );
 
@@ -13256,33 +13498,37 @@
       /* style */
       var __vue_inject_styles__$Y = function (inject) {
         if (!inject) { return }
-        inject("data-v-740b3857_0", { source: "\n.fade-enter-active[data-v-740b3857] {\n  transition: opacity .25s ease-in-out;\n}\n.fade-leave-active[data-v-740b3857] {\n  transition: opacity .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.fade-enter[data-v-740b3857],\n.fade-leave-to[data-v-740b3857] {\n  opacity: 0;\n}\n", map: {"version":3,"sources":["/Users/dziudek/Desktop/Github/shards-vue/src/components/tabs/Tab.vue"],"names":[],"mappings":";AAuHA;EACA,oCAAA;AACA;AAEA;EACA,yDAAA;AACA;AAEA;;EAEA,UAAA;AACA","file":"Tab.vue","sourcesContent":["<template>\n    <transition mode=\"out-in\" name=\"fade\"\n        @beforeEnter=\"handleBeforeEnter\"\n        @afterEnter=\"handleAfterEnter\"\n        @afterLeave=\"handleAfterLeave\">\n        <component :is=\"tag\"\n            ref=\"panel\"\n            v-show=\"localActiveState\"\n            role=\"tabpanel\"\n            :id=\"computedID\"\n            :aria-hidden=\"localActiveState ? 'false' : 'true'\"\n            :aria-expanded=\"localActiveState ? 'true' : 'false'\"\n            :aria-labelledby=\"controlledBy || null\"\n            :class=\"[\n                'tab-pane',\n                ($parent && $parent.card && !noBody) ? 'card-body' : '',\n                show ? 'show' : '',\n                disabled ? 'disabled' : '',\n                localActiveState ? 'active' : ''\n            ]\">\n            <slot />\n        </component>\n    </transition>\n</template>\n\n<script>\nimport { guid } from '../../utils';\n\nexport default {\n    name: 'd-tab',\n    data() {\n        return {\n            localActiveState: this.active && !this.disabled,\n            show: false\n        }\n    },\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The active state.\n         */\n        active: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The element tag.\n         */\n        tag: {\n            type: String,\n            default: 'div'\n        },\n        /**\n         * The button ID.\n         */\n        buttonId: {\n            type: String,\n            default: ''\n        },\n        /**\n         * The title.\n         */\n        title: {\n            type: String,\n            default: ''\n        },\n        /**\n         * The disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether the card should display the body, or not.\n         */\n        noBody: {\n            type: Boolean,\n            default: false\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `dr-tab-${guid()}`\n        },\n        controlledBy() {\n            return this.buttonId || `dr-tab-button-${guid()}`\n        },\n        computedFade() {\n            return this.$parent.fade\n        },\n        _isTab() {\n            return true\n        }\n    },\n    methods: {\n        handleBeforeEnter() {\n            this.show = false\n        },\n        handleAfterEnter() {\n            this.show = true\n        },\n        handleAfterLeave() {\n            this.show = false\n        }\n    },\n    mounted() {\n        this.show = this.localActiveState\n    }\n}\n</script>\n\n<style scoped>\n.fade-enter-active {\n  transition: opacity .25s ease-in-out;\n}\n\n.fade-leave-active {\n  transition: opacity .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n\n.fade-enter,\n.fade-leave-to {\n  opacity: 0;\n}\n</style>\n"]}, media: undefined });
+        inject("data-v-050a3853_0", { source: "\n.fade-enter-active[data-v-050a3853] {\n  transition: opacity .25s ease-in-out;\n}\n.fade-leave-active[data-v-050a3853] {\n  transition: opacity .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.fade-enter[data-v-050a3853],\n.fade-leave-to[data-v-050a3853] {\n  opacity: 0;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/tabs/Tab.vue"],"names":[],"mappings":";AAuHA;EACA,oCAAA;AACA;AAEA;EACA,yDAAA;AACA;AAEA;;EAEA,UAAA;AACA","file":"Tab.vue","sourcesContent":["<template>\n    <transition mode=\"out-in\" name=\"fade\"\n        @beforeEnter=\"handleBeforeEnter\"\n        @afterEnter=\"handleAfterEnter\"\n        @afterLeave=\"handleAfterLeave\">\n        <component :is=\"tag\"\n            ref=\"panel\"\n            v-show=\"localActiveState\"\n            role=\"tabpanel\"\n            :id=\"computedID\"\n            :aria-hidden=\"localActiveState ? 'false' : 'true'\"\n            :aria-expanded=\"localActiveState ? 'true' : 'false'\"\n            :aria-labelledby=\"controlledBy || null\"\n            :class=\"[\n                'tab-pane',\n                ($parent && $parent.card && !noBody) ? 'card-body' : '',\n                show ? 'show' : '',\n                disabled ? 'disabled' : '',\n                localActiveState ? 'active' : ''\n            ]\">\n            <slot />\n        </component>\n    </transition>\n</template>\n\n<script>\nimport { guid } from '../../utils';\n\nexport default {\n    name: 'd-tab',\n    data() {\n        return {\n            localActiveState: this.active && !this.disabled,\n            show: false\n        }\n    },\n    props: {\n        /**\n         * The element ID.\n         */\n        id: {\n            type: String,\n            default: null\n        },\n        /**\n         * The active state.\n         */\n        active: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * The element tag.\n         */\n        tag: {\n            type: String,\n            default: 'div'\n        },\n        /**\n         * The button ID.\n         */\n        buttonId: {\n            type: String,\n            default: ''\n        },\n        /**\n         * The title.\n         */\n        title: {\n            type: String,\n            default: ''\n        },\n        /**\n         * The disabled state.\n         */\n        disabled: {\n            type: Boolean,\n            default: false\n        },\n        /**\n         * Whether the card should display the body, or not.\n         */\n        noBody: {\n            type: Boolean,\n            default: false\n        }\n    },\n    computed: {\n        computedID() {\n            return this.id || `dr-tab-${guid()}`\n        },\n        controlledBy() {\n            return this.buttonId || `dr-tab-button-${guid()}`\n        },\n        computedFade() {\n            return this.$parent.fade\n        },\n        _isTab() {\n            return true\n        }\n    },\n    methods: {\n        handleBeforeEnter() {\n            this.show = false\n        },\n        handleAfterEnter() {\n            this.show = true\n        },\n        handleAfterLeave() {\n            this.show = false\n        }\n    },\n    mounted() {\n        this.show = this.localActiveState\n    }\n}\n</script>\n\n<style scoped>\n.fade-enter-active {\n  transition: opacity .25s ease-in-out;\n}\n\n.fade-leave-active {\n  transition: opacity .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n\n.fade-enter,\n.fade-leave-to {\n  opacity: 0;\n}\n</style>\n"]}, media: undefined });
 
       };
       /* scoped */
-      var __vue_scope_id__$Y = "data-v-740b3857";
+      var __vue_scope_id__$Y = "data-v-050a3853";
       /* module identifier */
       var __vue_module_identifier__$Y = undefined;
       /* functional template */
       var __vue_is_functional_template__$Y = false;
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dTab = normalizeComponent_1(
+      var __vue_component__$Y = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$Y, staticRenderFns: __vue_staticRenderFns__$Y },
         __vue_inject_styles__$Y,
         __vue_script__$Y,
         __vue_scope_id__$Y,
         __vue_is_functional_template__$Y,
         __vue_module_identifier__$Y,
+        false,
         browser,
+        undefined,
         undefined
       );
 
     var components$s = {
-        dTabs: dTabs,
-        dTab: dTab
+        dTabs: __vue_component__$X,
+        dTab: __vue_component__$Y
     };
 
     var VuePlugin$s = {
@@ -13499,21 +13745,25 @@
       
       /* style inject SSR */
       
+      /* style inject shadow dom */
+      
 
       
-      var dTooltip = normalizeComponent_1(
+      var __vue_component__$Z = /*#__PURE__*/normalizeComponent_1(
         { render: __vue_render__$Z, staticRenderFns: __vue_staticRenderFns__$Z },
         __vue_inject_styles__$Z,
         __vue_script__$Z,
         __vue_scope_id__$Z,
         __vue_is_functional_template__$Z,
         __vue_module_identifier__$Z,
+        false,
+        undefined,
         undefined,
         undefined
       );
 
     var components$t = {
-        dTooltip: dTooltip
+        dTooltip: __vue_component__$Z
     };
 
     var VuePlugin$t = {
@@ -13758,7 +14008,7 @@
         el[KEY].updateConfig(parsedBindings);
     }
 
-    var dTooltip$1 = {
+    var dTooltip = {
         bind: function bind (el, bindings, vnode) {
             applyTooltip(el, bindings, vnode);
         },
@@ -13793,7 +14043,7 @@
     };
 
     var directives$1 = {
-      dTooltip: dTooltip$1
+      dTooltip: dTooltip
     };
 
     var VuePlugin$v = {
