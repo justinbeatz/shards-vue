@@ -19,7 +19,14 @@
             :size="size"
             :id="computedSplitID"
             @click="click">
-            <slot name="button-content">{{ text }}</slot>
+            <slot name="button-content">
+                <i
+                    v-if="icon !== ''"
+                    class="material-icons">
+                    {{ icon }}
+                </i>
+                {{ text }}
+            </slot>
         </d-button>
 
         <!-- Dropdown Toggle -->
@@ -39,7 +46,14 @@
             @click="toggle"
             @keydown="toggle">
             <span v-if="split" class="sr-only">{{ toggleText }}</span>
-            <slot v-else name="button-content">{{ text }}</slot>
+            <slot v-else name="button-content">
+                <i
+                    v-if="icon !== ''"
+                    class="material-icons">
+                    {{ icon }}
+                </i>
+                {{ text }}
+            </slot>
         </component>
 
         <!-- Dropdown Menu -->
@@ -170,6 +184,13 @@ export default {
          * The button label's text.
          */
         text: {
+            type: String,
+            default: ''
+        },
+        /**
+         * Icon used in the dropdown
+         */
+        icon: {
             type: String,
             default: ''
         },
@@ -438,5 +459,9 @@ export default {
 <style scoped>
 .nav-link:hover {
     cursor: pointer;
+}
+
+.material-icons {
+    color: #fff;
 }
 </style>
