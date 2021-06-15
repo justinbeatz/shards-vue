@@ -6868,7 +6868,12 @@ __vue_render__$l._withStripped = true;
  */
 var script$m = {
     name: 'd-dropdown-item',
-    props: Object.assign({}, createLinkProps())
+    props: Object.assign({}, createLinkProps()),
+    methods: {
+        click: function click(event) {
+            this.$emit('click', event);
+        }
+    }
 };
 
 /* script */
@@ -6882,7 +6887,11 @@ var __vue_render__$m = function() {
   return _c(
     "d-link",
     _vm._b(
-      { staticClass: "dropdown-item", attrs: { role: "menuitem" } },
+      {
+        staticClass: "dropdown-item",
+        attrs: { role: "menuitem" },
+        on: { click: _vm.click }
+      },
       "d-link",
       _vm.$props,
       false
@@ -6897,11 +6906,11 @@ __vue_render__$m._withStripped = true;
   /* style */
   var __vue_inject_styles__$m = function (inject) {
     if (!inject) { return }
-    inject("data-v-3dedc48a_0", { source: "\n.dropdown-item[data-v-3dedc48a]:focus {\n    outline: 0;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/dropdown/DropdownItem.vue"],"names":[],"mappings":";AAqBA;IACA,UAAA;AACA","file":"DropdownItem.vue","sourcesContent":["<template>\n    <d-link class=\"dropdown-item\" role=\"menuitem\" v-bind=\"$props\">\n        <slot />\n    </d-link>\n</template>\n\n<script>\nimport createLinkProps from '../link/create-link-props'\n\n/**\n * This subcomponent is inheriting <a href=\"/docs/components/link\">Link</a> component's props.\n */\nexport default {\n    name: 'd-dropdown-item',\n    props: {\n        ...createLinkProps()\n    }\n}\n</script>\n\n<style scoped>\n.dropdown-item:focus {\n    outline: 0;\n}\n</style>\n"]}, media: undefined });
+    inject("data-v-5ca12fa7_0", { source: "\n.dropdown-item[data-v-5ca12fa7]:focus {\n    outline: 0;\n}\n", map: {"version":3,"sources":["/Users/justinbeatz/Development/Projects/Vue/shards-vue/src/components/dropdown/DropdownItem.vue"],"names":[],"mappings":";AA0BA;IACA,UAAA;AACA","file":"DropdownItem.vue","sourcesContent":["<template>\n    <d-link class=\"dropdown-item\" role=\"menuitem\" v-bind=\"$props\" @click=\"click\">\n        <slot />\n    </d-link>\n</template>\n\n<script>\nimport createLinkProps from '../link/create-link-props'\n\n/**\n * This subcomponent is inheriting <a href=\"/docs/components/link\">Link</a> component's props.\n */\nexport default {\n    name: 'd-dropdown-item',\n    props: {\n        ...createLinkProps()\n    },\n    methods: {\n        click(event) {\n            this.$emit('click', event);\n        }\n    }\n}\n</script>\n\n<style scoped>\n.dropdown-item:focus {\n    outline: 0;\n}\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  var __vue_scope_id__$m = "data-v-3dedc48a";
+  var __vue_scope_id__$m = "data-v-5ca12fa7";
   /* module identifier */
   var __vue_module_identifier__$m = undefined;
   /* functional template */
