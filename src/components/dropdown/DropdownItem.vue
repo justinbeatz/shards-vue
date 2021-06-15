@@ -1,5 +1,5 @@
 <template>
-    <d-link class="dropdown-item" role="menuitem" v-bind="$props">
+    <d-link class="dropdown-item" role="menuitem" v-bind="$props" @click="click">
         <slot />
     </d-link>
 </template>
@@ -14,6 +14,11 @@ export default {
     name: 'd-dropdown-item',
     props: {
         ...createLinkProps()
+    },
+    methods: {
+        click(event) {
+            this.$emit('click', event);
+        }
     }
 }
 </script>

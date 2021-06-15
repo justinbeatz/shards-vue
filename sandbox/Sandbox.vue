@@ -1,5 +1,15 @@
 <template>
-    <d-button @click="handleClick">Click me!</d-button>
+    <div>
+        <d-button @click="handleClick">Click me!</d-button>
+        <d-link href="#">Some link</d-link>
+        <div>
+            <d-dropdown text="Dropdown">
+                <d-dropdown-item @click="handleClick">
+                    Click me!
+                </d-dropdown-item>
+            </d-dropdown>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -29,12 +39,18 @@ import { Button } from '../src/components'
 // Vue.use(Button)
 
 // ALTERNATIVE: Import the component directly.
-import dButton from '../src/components/button/Button'
+import dButton from '../src/components/button/Button';
+import dLink from '../src/components/link/Link.vue';
+import dDropdown from '../src/components/dropdown/Dropdown.vue';
+import dDropdownItem from '../src/components/dropdown/DropdownItem.vue';
 
 // We define our custom component's logic.
 export default {
     components: {
-        dButton
+        dButton,
+        dDropdown,
+        dDropdownItem,
+        dLink
     },
     methods: {
         handleClick() {
